@@ -665,27 +665,36 @@ That didn't work...
 
 ## Boot sequence
 
+Lets start examining this thing and figure out where a good spot is that we can inject some commands to get a shell.
+
 ### IPL
 
-### SPL (UBoot by SigmaStar/MStar)
-```sh
-# Set boot args
-bootargs=console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
+I don't really know what this does, just included it for completeness :)
 
-# Start boot
-bootlogo; sf probe 0; sf read 0x22000000 0x70000 0x280000; bootm 0x22000000;
+
+### SPL (UBoot by SigmaStar/MStar)
+
+The SPL is the UBoot environment I had access to after bricking the device. We can check the boot args using `printenv` or `env print`. The bootargs are passed to the linux kernel, and `init` is the first thing ran after the kernel loads successfully. In this case we see that the first thing run by Linux is `/linuxrc`.
+
+```sh
+bootargs=console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
 ```
 
 ### Linux Kernel
+
+The following params are passed to the linux kernel by UBoot:
 ```sh
 mount /dev/mtdblock3
 /liniuxrc
 ```
 
 ### Linuxrc
+Lets see the contents of `/linuxrc`
+
 ```sh
 /bin/bash
 ```
+Well that wasn't much help. After linux loads, it spawns bash. Next we should check out the init.d scripts, starting with `rcS`
 
 ### init.d/rcS
 ```sh
@@ -700,6 +709,8 @@ do
         fi
 done
 ```
+Ok, now we're getting somewhere. There must be some scripts in `/etc/init.d/` that match the pattern laid out in rcS.
+Lets take a look at these initscripts.
 
 ### initscritpt(s) in /etc/init.d
 
@@ -731,6 +742,7 @@ if [ ! -e /dev/zero ] ; then  
 	mknod /dev/zero c 1 5
 fi
 ```
+This one is just initializing consoles I think.
 
 #### S01udevs
 ```sh
@@ -745,6 +757,7 @@ mount -t devpts devpts /dev/pts
 
 #udevtrigger
 ```
+This one does some stuff, not quite sure what :D
 
 #### S02pppd
 ```sh
@@ -754,6 +767,7 @@ mkdir /tmp/lock
 mount --binding /tmp/run  /var/run
 mount --binding /tmp/lock /var/lock
 ```
+This one mounts some stuff using --binding. This was my first encounter with the --binding flag. This is cool, because we're actually going to use this technique to root the device.
 
 #### S03pppoe
 ```sh
@@ -766,6 +780,7 @@ mount --binding /tmp/lock /var/lock
 #cp /etc/ppp/pap-secrets-bk /tmp/pap-secrets-bak
 #cp /etc/ppp/pppoe.conf-bk /tmp/pppoe.conf-bak
 ```
+Everything in here is commented out.
 
 #### S80network
 ```sh
@@ -816,6 +831,7 @@ else
         [ x$gateway != x- ] && route add default gw $gateway
 fi
 ```
+This one initializes the network configuration.
 
 #### S99
 ```sh
@@ -853,55 +869,46 @@ mount -t squashfs /dev/mtdblock4 /opt
 cd /opt
 sh run_app.sh
 ```
-
+This one is also interesting, lots of custom code in here.
+While attached to the UART console I noticed 
 Interesting spots to look for vulns:
 - maybe we can skip right to `run_app.sh` before the tty is killed
 - maybe we can alias `stty` to prevent tty from being killed
 - maybe `/bin/upgrade` checks local storage?
-- 
-### Tell init what to do to dump `run_app.sh`
-```sh
-/bin/mount -a,/etc/init.d/S00devs,/etc/init.d/S01udev,/etc/init.d/S02pppd,/etc/init.d/S03pppoe,/etc/init.d/S80network,mount -t squashfs /dev/mtdblock4 /opt,cat /opt/run_app.sh
-```
 
-```sh
-# Set boot args
-set bootargs console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/bin/mount -a,/etc/init.d/S00devs,/etc/init.d/S01udev,/etc/init.d/S02pppd,/etc/init.d/S03pppoe,/etc/init.d/S80network,mount -t squashfs /dev/mtdblock4 /opt,cat /opt/run_app.sh LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
-
-# Start boot
-bootlogo; sf probe 0; sf read 0x22000000 0x70000 0x280000; bootm 0x22000000;
-```
-
-### Run `run_app.sh` instead of init.d scripts
-
-```sh
-# Set boot args
-set bootargs console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/bin/cat run_app.sh LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
-
-# Start boot
-bootlogo; sf probe 0; sf read 0x22000000 0x70000 0x280000; bootm 0x22000000;
-```
-
-### Alias `stty` to prevent killing input/output.
-
-```sh
-# Set boot args
-set bootargs console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/bin/alias stty=echo && /linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
-
-# Start boot
-bootlogo; sf probe 0; sf read 0x22000000 0x70000 0x280000; bootm 0x22000000;
-```
 ## Actually how to get Root
 
-Just follow this guide
-https://gist.github.com/aSmig/e50058a54ab85428915521f233ffa3d0
+After bricking the device I was searching for ways to rebuild it. While looking for clues I searched the IPL code that is displayed on boot, and that's when I came across [Nicole's blog](https://www.dpin.de/nf/cheap-surveillance-cameras-nvr-hacking-to-work/). 
 
-It didn't work at first, so I used the UBoot command line to only dump the app partition and beyond. Then `binwalk` was able to properly dump the squashfs -- previously it was unable to do so bc of some corruption.
+In the blog post, Nicole shared [this guide](https://gist.github.com/aSmig/e50058a54ab85428915521f233ffa3d0)
 
-![[minor_diff_in_app_run.png]]
+As she mentioned, it didn't work at first. I used the UBoot command line to only dump the app partition and beyond. Then `binwalk` was able to properly dump the squashfs -- previously it was unable to do so bc of some corruption.
 
-Make the appropriate adjustments to the script(s) and we have ROOT SHELL whenever the USB drive is plugged in during boot!
+In the gist/rooting guide Nicole shared, it's mentioned that:
 
+> One of the startup scripts contains the following snippet: 
+```sh
+if [ -e $MOUNT_DIR/enable_log_forever ];then
+                echo "enable log2 found."
+                rv=$(cat $MOUNT_DIR/enable_log_forever)
+                if [ "$rv" == "1000000001" ];then
+                        if [ -e $MOUNT_DIR/dvr_app ];then
+                                echo "mount bind dvr_app."
+                                mount --bind $MOUNT_DIR/dvr_app /root/dvr_app/dvr_app
+                        fi
+```
+On my device, this snippet resides in `/opt/run_app.sh`, which was the last thing called from init.d/S99
+```sh
+if [ -e $MOUNT_DIR/enable_log_forever ];then
+                echo "enable log2 found."
+                rv=$(cat $MOUNT_DIR/enable_log_forever)
+                if [ "$rv" == "1000000001" ];then
+                        if [ -e $MOUNT_DIR/app.out ];then
+                                echo "mount bind app.out."
+                                mount --bind $MOUNT_DIR/app.out /opt/app/app.out
+                        fi
+```
+Upon examining the snippet, I noticed something interesting -- all instances of `dvr_app` had been replaced with `app.out`!
+So, to get the exploit from the gist working, all you need to do is update the dvr's main binary name and path.
 
-
-
+This is where the fun ends. I set out to get a root shell on this thing just to see if I could. Now that I have it, I'll use it in the future for debugging and hunting bugs. Since the device doesn't create or listen to any public facing sockets, any findings likely won't be that critical, however this device DOES attach to AWS to sync data to the mobile app.
