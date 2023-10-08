@@ -1,0 +1,117 @@
+{
+  "main": {
+    "id": "90fd8ea298163f64",
+    "type": "split",
+    "children": [
+      {
+        "id": "597b4c38db49b3cb",
+        "type": "leaf",
+        "dimension": 48.71794871794871,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "wpwn.md",
+            "mode": "source"
+          }
+        },
+        "group": "c9d27b0a5f7f87e5"
+      },
+      {
+        "id": "b22376358ca53887",
+        "type": "leaf",
+        "dimension": 51.28205128205129,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "wpwn.md",
+            "mode": "preview"
+          }
+        },
+        "group": "c9d27b0a5f7f87e5"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0ddaeef050ebf6d7",
+    "type": "split",
+    "children": [
+      {
+        "id": "50a11f87916b66e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "24b6a7903d82fae2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "b96c261542fc4503",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "1.104",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cb747c90b3db6110",
+    "type": "split",
+    "children": [
+      {
+        "id": "261653ff09fbfc1c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "80163c4a106101ba",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "wpwn.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "597b4c38db49b3cb",
+  "lastOpenFiles": [
+    "wpwn.md",
+    "Vegeta.md",
+    "noontide.md",
+    "Y0usef.md",
+    "Sumo.md",
+    "Solstice.md",
+    "Seppuku.md",
+    "SAR.md",
+    "PyExp.md",
+    "Potato.md"
+  ]
+}

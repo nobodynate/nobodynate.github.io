@@ -1,0 +1,106 @@
+{
+  "main": {
+    "id": "ea292c69ab8e406a",
+    "type": "split",
+    "children": [
+      {
+        "id": "72dd90a55b49cb5e",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      },
+      {
+        "id": "9bca7d5c5df33743",
+        "type": "leaf",
+        "state": {
+          "type": "image",
+          "state": {
+            "file": "VulnHub/Pasted image 20220505075716.png"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "519377bead1894e4",
+    "type": "split",
+    "children": [
+      {
+        "id": "6dc01f6424c59c41",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ac4632d0d6c2756",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "cf5a1afedb1ae007",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "active mode",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3672d763468503ca",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f52dda5c573f103",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e424e553d479dc0a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "72dd90a55b49cb5e",
+  "lastOpenFiles": [
+    "Pasted image 20220505075752.png",
+    "VulnHub/Pasted image 20220505075716.png",
+    "Pasted image 20220505111319.png",
+    "VulnHub/Lampiano.md",
+    "VulnHub/Y0usef.md",
+    "TryHackMe/Work in Progress/Anonymous.md",
+    "index.md",
+    "TryHackMe/In Process/relevant.md"
+  ]
+}

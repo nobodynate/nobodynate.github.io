@@ -1,0 +1,119 @@
+{
+  "main": {
+    "id": "97bfe9ffc0c0a5e1",
+    "type": "split",
+    "children": [
+      {
+        "id": "aa0e8e0ef7e3b865",
+        "type": "leaf",
+        "dimension": 50.10869565217391,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Sizzle.md",
+            "mode": "source",
+            "source": false
+          }
+        },
+        "group": "f03708bea3ffc2a9"
+      },
+      {
+        "id": "9a0e92dfd02a291b",
+        "type": "leaf",
+        "dimension": 49.89130434782609,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Sizzle.md",
+            "mode": "preview",
+            "source": false
+          }
+        },
+        "group": "f03708bea3ffc2a9"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e1f56175b467a425",
+    "type": "split",
+    "children": [
+      {
+        "id": "3db7d6cbba24066f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "889051a61bbec7ac",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "1cae23c8da56d8e7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "cewl",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e0272d310a0a000a",
+    "type": "split",
+    "children": [
+      {
+        "id": "6d3d0b89c1e677ad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9ee07f7fb5542516",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Sizzle.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "aa0e8e0ef7e3b865",
+  "lastOpenFiles": [
+    "Beep.md",
+    "Active.md",
+    "Arctic.md",
+    "Bastion.md",
+    "Blue.md",
+    "Devel.md",
+    "Heist.md",
+    "Jerry.md",
+    "Legacy.md",
+    "netmon.md"
+  ]
+}

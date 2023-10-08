@@ -1,0 +1,116 @@
+{
+  "main": {
+    "id": "4b553e87574bacbb",
+    "type": "split",
+    "children": [
+      {
+        "id": "9249eac710ee11dd",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "AD Pivoting and Lateral Movement.md",
+            "mode": "source"
+          }
+        },
+        "group": "abe7b338b1887053"
+      },
+      {
+        "id": "32c4108df3fbe1db",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "AD Pivoting and Lateral Movement.md",
+            "mode": "preview"
+          }
+        },
+        "group": "abe7b338b1887053"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ce8ab08c9fed5690",
+    "type": "split",
+    "children": [
+      {
+        "id": "62747b67b9cb4070",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18a5255bfdd51a11",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "cd686a9a0653a67c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "Cyber",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 458,
+    "collapsed": true
+  },
+  "right": {
+    "id": "b7317ddee0fb056a",
+    "type": "split",
+    "children": [
+      {
+        "id": "f6e15fc59ca585e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d455260f4d90d104",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AD Pivoting and Lateral Movement.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "9249eac710ee11dd",
+  "lastOpenFiles": [
+    "AD Pivoting and Lateral Movement.md",
+    "Work in Progress/Throwback/session 8.md",
+    "Work in Progress/Throwback/10.200.70.219 Throwback-Prod.md",
+    "Work in Progress/Throwback/session 7.md",
+    "Work in Progress/Throwback/10.200.70.250.md",
+    "Untitled.md",
+    "Work in Progress/Throwback/10.200.70.138 Throwback-FW01.md",
+    "Work in Progress/Throwback/10.200.70.232  Throwback-Mail.md",
+    "Work in Progress/Throwback/10.41.0.2.md",
+    "Work in Progress/Throwback/Loot.md"
+  ]
+}

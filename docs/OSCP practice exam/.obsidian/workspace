@@ -1,0 +1,123 @@
+{
+  "main": {
+    "id": "c5d4016ca85a2b36",
+    "type": "split",
+    "children": [
+      {
+        "id": "d030bd5b1f67c73d",
+        "type": "split",
+        "children": [
+          {
+            "id": "8bc7cb5545c5e59f",
+            "type": "leaf",
+            "dimension": 43.87550200803213,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "0. Intro.md",
+                "mode": "preview"
+              }
+            },
+            "group": "13ebaa428775c326"
+          },
+          {
+            "id": "5dcf3476abfdf8bd",
+            "type": "leaf",
+            "dimension": 56.12449799196787,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "0. Intro.md",
+                "mode": "source"
+              }
+            },
+            "group": "13ebaa428775c326"
+          }
+        ],
+        "direction": "horizontal"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "567fbebce1ed6ad0",
+    "type": "split",
+    "children": [
+      {
+        "id": "ef32734c2573e9d4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "393068d90f3ee7a0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "129e3b730e71d528",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f5260bcf2ee34d81",
+    "type": "split",
+    "children": [
+      {
+        "id": "603225115b4c42ba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72ad0f8825d784c4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "0. Intro.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "5dcf3476abfdf8bd",
+  "lastOpenFiles": [
+    "0. Intro.md",
+    "Untitled.md",
+    "Pasted image 20220203075427.png",
+    "1. Cascade.md",
+    "6. Sense.md",
+    "5. Sauna.md",
+    "4. Forest.md",
+    "3. Cronos.md",
+    "2. Chatterbox.md"
+  ]
+}
