@@ -1,6 +1,6 @@
 # ctfs
 
-This repo is used to build my [personal site](http://natewilson.xyz/).
+This repo is used to build my writeup site
 
 The site hosts notes I take while studying for the OSCP.
 
