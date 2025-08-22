@@ -1,0 +1,4443 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../../../OSCP-Prep/oscp/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>ssr21q_v102_nvr04 - Nate's CTF Writeups</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ssr21q_v102_nvr04" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-header__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nate's CTF Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ssr21q_v102_nvr04
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-nav__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Nate's CTF Writeups
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IoT
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IoT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nightowl
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nightowl
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ssr21q_v102_nvr04
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssr21q_v102_nvr04
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#boot-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boot log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-the-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking the device
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-the-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving the device
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Saving the device">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      printenv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figuring-out-whats-fucked-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figuring out what's fucked up
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brute-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Brute Forcing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boot-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boot sequence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boot sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ipl" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spl-uboot-by-sigmastarmstar" class="md-nav__link">
+    <span class="md-ellipsis">
+      SPL (UBoot by SigmaStar/MStar)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux Kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linuxrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linuxrc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initdrcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      init.d/rcS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initscritpts-in-etcinitd" class="md-nav__link">
+    <span class="md-ellipsis">
+      initscritpt(s) in /etc/init.d
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="initscritpt(s) in /etc/init.d">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#s00devs" class="md-nav__link">
+    <span class="md-ellipsis">
+      S00devs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s01udevs" class="md-nav__link">
+    <span class="md-ellipsis">
+      S01udevs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s02pppd" class="md-nav__link">
+    <span class="md-ellipsis">
+      S02pppd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s03pppoe" class="md-nav__link">
+    <span class="md-ellipsis">
+      S03pppoe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s80network" class="md-nav__link">
+    <span class="md-ellipsis">
+      S80network
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s99" class="md-nav__link">
+    <span class="md-ellipsis">
+      S99
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actually-how-to-get-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actually how to get Root
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP Prep
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP Prep
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/oscp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oscp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Active/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Active
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Arctic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arctic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Bashed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bashed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Bastion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Blocky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blocky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Bounty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bounty
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Devel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Granny/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Granny
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Heist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Jerry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jerry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lame
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Legacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Legacy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Mirai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mirai
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Nibbles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nibbles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Optimum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Pasted%20image%2020220713093106.png/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pasted image 20220713093106.png
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remote
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sauna
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Shocker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shocker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Sizzle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sizzle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Timelapse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Timelapse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/netmon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netmon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_27" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_27" id="__nav_3_2_27_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_27_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_27">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Bastard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Brainfuck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainfuck
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Breadcrumbs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadcrumbs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Kotarak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kotarak
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Nineveh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nineveh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/ScriptKiddie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script Kiddie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/HackTheBox/Work%20in%20Progress/Solidstate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solidstate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP practice exam
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP practice exam
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/0.%20Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    General
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/1.%20Cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.182
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/2.%20Chatterbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.74
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/3.%20Cronos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/4.%20Forest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.161
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/5.%20Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.175
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/OSCP%20practice%20exam/6.%20Sense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.60
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TryHackMe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            TryHackMe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/AD%20Pivoting%20and%20Lateral%20Movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pivoting and lateral movement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Alfred/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alfred
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Brainpan1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainpan 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Brainstorm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainstorm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Gatekeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gatekeeper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Mr%20Robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mr. Robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skynet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Untitled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Untitled
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Vulnnet%20Roasted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnnet Roasted
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Vulnversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnversity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/hackpark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackpark
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/internal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Internal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/overpass2hacked/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overpass2hacked
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/steelmountain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Steelmountain
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tomghost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18" id="__nav_3_4_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anonymous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Daily%20Bugle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Daily Bugle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Ice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/dogcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dogcat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/relevant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relevant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18_7" id="__nav_3_4_18_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Throwback
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_18_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18_7">
+            <span class="md-nav__icon md-icon"></span>
+            Throwback
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/10.200.70.138%20Throwback-FW01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-FW01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/10.200.70.219%20Throwback-Prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Prod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/10.200.70.232%20%20Throwback-Mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Mail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/10.200.70.250/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.200.70.250
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/10.41.0.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.41.0.2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/Loot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/session%207/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/TryHackMe/Work%20in%20Progress/Throwback/session%208/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VulnHub
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            VulnHub
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Assertion%20101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assertion 101
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Cute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Cybersploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cybersploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/DC-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/DC-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Dawn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dawn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Decoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decoy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Funbox%20EasyEnum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox: EasyEnum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Funbox%20Rookie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox Rookie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Funbox3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Gaara/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gaara
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Geisha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geisha
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Inclusiveness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inclusiveness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Katana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Katana
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Lampiano/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lampiao
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monitoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Natraj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Natraj
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Potato/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Potato
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/PyExp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyExp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/SAR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Seppuku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seppuku
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Solstice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solstice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Sumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sumo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Vegeta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vegeta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/Y0usef/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Y0usef
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/noontide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Noontide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/oscp%20prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSCP prep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../OSCP-Prep/VulnHub/wpwn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wpwn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#boot-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boot log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breaking-the-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breaking the device
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-the-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving the device
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Saving the device">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      printenv
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figuring-out-whats-fucked-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figuring out what's fucked up
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#brute-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Brute Forcing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boot-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boot sequence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boot sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ipl" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spl-uboot-by-sigmastarmstar" class="md-nav__link">
+    <span class="md-ellipsis">
+      SPL (UBoot by SigmaStar/MStar)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux Kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linuxrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linuxrc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initdrcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      init.d/rcS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initscritpts-in-etcinitd" class="md-nav__link">
+    <span class="md-ellipsis">
+      initscritpt(s) in /etc/init.d
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="initscritpt(s) in /etc/init.d">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#s00devs" class="md-nav__link">
+    <span class="md-ellipsis">
+      S00devs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s01udevs" class="md-nav__link">
+    <span class="md-ellipsis">
+      S01udevs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s02pppd" class="md-nav__link">
+    <span class="md-ellipsis">
+      S02pppd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s03pppoe" class="md-nav__link">
+    <span class="md-ellipsis">
+      S03pppoe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s80network" class="md-nav__link">
+    <span class="md-ellipsis">
+      S80network
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s99" class="md-nav__link">
+    <span class="md-ellipsis">
+      S99
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actually-how-to-get-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actually how to get Root
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ssr21q_v102_nvr04">ssr21q_v102_nvr04<a class="headerlink" href="#ssr21q_v102_nvr04" title="Permanent link">&para;</a></h1>
+<p><img alt="board" src="../board.jpg" /></p>
+<p>This board can be found in some cheap surveillance camera NVRs such as <a href="https://www.dpin.de/nf/cheap-surveillance-cameras-nvr-hacking-to-work/">this one</a> or <a href="https://support.nightowlsp.com/hc/en-us/articles/12716255551515-WNIP2-Series">this one</a>.</p>
+<h2 id="boot-log">Boot log<a class="headerlink" href="#boot-log" title="Permanent link">&para;</a></h2>
+<pre><code>IPL g8e04b60
+D-1f
+HW Reset
+miupll_233MHz
+MIU0 zq=0x003a
+miu_bw_set
+utmi_1_init done
+utmi_2_init done
+utmi_3_init done
+usbpll init done......
+SPI 54M
+clk_init done 
+P1 USB_rterm trim=0x000d
+P1 USB_HS_TX_CURRENT trim=0x0001
+P2 USB_rterm trim=0x000d
+P2 USB_HS_TX_CURRENT trim=0x000d
+P3 USB_rterm trim=0x000d
+P3 USB_HS_TX_CURRENT trim=0x000d
+PM_vol_bgap trim=0x0004
+GCR_SAR_DATA trim=0x0193
+ETH 10T output swing trim=0x0010
+ETH 100T output swing trim=0x0011
+ETH RX input impedance trim=0x0000
+ETH TX output impedance trim=0x0000
+MIPI_HS_RTERM trim=0x0001
+MIPI_LP_RTERM trim=0x0000
+TX_current trimming trim[0x1A]=0x0048
+TX_current trimming trim[0x1B]=0x004a
+TX_current trimming trim[0x1C]=0x004a
+HDMI2TX Rterm trim=0x001f
+HDMI2TX_Ibias_CH0 trim=0x001c
+HDMI2TX_Ibias_CH1 trim=0x001b
+HDMI2TX_Ibias_CH2 trim=0x001a
+HDMI2TX_Ibias_CH3 trim=0x001a
+256MB
+BIST0_0001-OK
+Enable MMU and CACHE
+Load IPL_CUST from NOR
+offset:00010000
+Unable to detect NOR
+Load time 682 us, 25900 KiB/s
+crc OK
+
+IPL_CUST g8e04b60
+MXP found at 0x00020000
+runUBOOT()
+runUBOOT()
+[SPI_NOR]
+ -Verify UBOOT CRC32 passed!
+ -Decompress UBOOT XZ
+  decomp_size=0x00081788
+Disable MMU and D-cache before jump to UBOOT�
+
+U-Boot 2015.01 (Aug 12 2020 - 10:21:49)
+
+Version: I2g45a386a
+I2C:   ready
+DRAM:  
+WARNING: Caches not enabled
+gpio debug MHal_GPIO_Pad_Set: pin=44
+gpio debug MHal_GPIO_Pad_Set: pin=17
+gpio debug MHal_GPIO_Pad_Set: pin=18
+gpio debug MHal_GPIO_Pad_Set: pin=39
+nor_flash_mxp allocated success!!
+Flash is detected (0x1003, 0x20, 0x70, 0x18)
+SF: Detected nor0 with total size 16 MiB
+MXP found at mxp_offset[3]=0x00020000, size=0x1000
+env_offset=0x60000 env_size=0x10000
+Flash is detected (0x1003, 0x20, 0x70, 0x18)
+SF: Detected nor0 with total size 16 MiB
+In:    serial
+Out:   serial
+Err:   serial
+Net:   MAC Address 00:32:65:00:00:04
+Auto-Negotiation...
+AN failLink Status Speed:10 Full-duplex:0
+Status Error!
+sstar_emac
+BootLogo IN(234f8eb0 40000), OUT(f700000, 800000), DISP(1280 1024 60), Interface:1
+_BootLogoHdmitxCtrl 3258
+Flash is detected (0x1003, 0x20, 0x70, 0x18)
+SF: Detected nor0 with total size 16 MiB
+SF: 2621440 bytes @ 0x70000 Read: OK
+##  Booting kernel from Legacy Image at 22000000 ...
+   Image Name:   MVX4##I2M#g45a386aKL_LX409##[BR:
+   Image Type:   ARM Linux Kernel Image (lzma compressed)
+   Data Size:    2608976 Bytes = 2.5 MiB
+   Load Address: 20008000
+   Entry Point:  20008000
+   Verifying Checksum ... OK
+-usb_stop(USB_PORT0)
+-usb_stop(USB_PORT1)
+-usb_stop(USB_PORT2)
+   Uncompressing Kernel Image ... 
+[XZ] !!!reserved 0x21000000 length=0x 1000000 for xz!!
+   XZ: uncompressed size=0x51f000, ret=7
+OK
+atags:0x20000000
+
+Starting kernel ...
+
+Booting Linux on physical CPU 0x0
+Linux version 4.9.84 (root@linux) (gcc version 4.9.4 (Buildroot 2017.08-gc7bbae9-dirty) ) #1 SMP PREEMPT Thu Jul 16 15:20:27 CST 2020
+CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=50c5387d
+CPU: div instructions available: patching division code
+CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+early_atags_to_fdt() success
+OF: fdt:Machine model: INFINITY2M SSC010A-S01A-S
+LXmem is 0xff00000 PHYS_OFFSET is 0x20000000
+Add mem start 0x20000000 size 0xff00000!!!!
+
+LX_MEM  = 0x20000000, 0xff00000
+LX_MEM2 = 0x0, 0x0
+LX_MEM3 = 0x0, 0x0
+EMAC_LEN= 0x0
+DRAM_LEN= 0x0
+no any mmap reserved
+deal_with_reserve_mma_heap memblock_reserve success mma_config[0].reserved_start=
+0x24500000
+
+deal_with_reserve_mma_heap memblock_reserve success mma_config[1].reserved_start=
+0x2d000000
+
+cma: Reserved 2 MiB at 0x2ce00000
+Memory policy: Data cache writealloc
+percpu: Embedded 14 pages/cpu @ccc1d000 s24920 r8192 d24232 u57344
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 37728
+Kernel command line: console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
+PID hash table entries: 1024 (order: 0, 4096 bytes)
+Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+Memory: 143440K/152576K available (3098K kernel code, 279K rwdata, 1520K rodata, 180K init, 170K bss, 7088K reserved, 2048K cma-reserved)
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+    vmalloc : 0xcd800000 - 0xff800000   ( 800 MB)
+    lowmem  : 0xc0000000 - 0xcd000000   ( 208 MB)
+    modules : 0xbf800000 - 0xc0000000   (   8 MB)
+      .text : 0xc0008000 - 0xc030edb8   (3100 kB)
+      .init : 0xc04b3000 - 0xc04e0000   ( 180 kB)
+      .data : 0xc04e0000 - 0xc0525ff8   ( 280 kB)
+       .bss : 0xc0527000 - 0xc0551b50   ( 171 kB)
+SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+Preemptible hierarchical RCU implementation.
+    Build-time adjustment of leaf fanout to 32.
+    RCU restricting CPUs from NR_CPUS=4 to nr_cpu_ids=2.
+RCU: Adjusting geometry for rcu_fanout_leaf=32, nr_cpu_ids=2
+NR_IRQS:16 nr_irqs:16 16
+ms_init_main_intc: np-&gt;name=ms_main_intc, parent=gic
+ms_init_pm_intc: np-&gt;name=ms_pm_intc, parent=ms_main_intc
+ss_init_gpi_intc: np-&gt;name=ms_gpi_intc, parent=ms_main_intc
+Find CLK_cpupll_clk, hook ms_cpuclk_ops
+arm_arch_timer: Architected cp15 timer(s) running at 6.00MHz (virt).
+clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1623fa770, max_idle_ns: 440795202238 ns
+sched_clock: 56 bits at 6MHz, resolution 166ns, wraps every 4398046511055ns
+Switching to timer-based delay loop, resolution 166ns
+Console: colour dummy device 80x30
+console [ttyS0] enabled
+Calibrating delay loop (skipped), value calculated using timer frequency.. 12.00 BogoMIPS (lpj=60000)
+pid_max: default: 4096 minimum: 301
+Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+CPU: Testing write buffer coherency: ok
+CPU0: update cpu_capacity 1024
+CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+Setting up static identity map for 0x20008240 - 0x20008270
+CPU1: update cpu_capacity 1024
+CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+Brought up 2 CPUs
+SMP: Total of 2 processors activated (24.00 BogoMIPS).
+CPU: All CPU(s) started in SVC mode.
+devtmpfs: initialized
+VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+futex hash table entries: 16 (order: -2, 1024 bytes)
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+
+
+Version : MVX4##I2M#g45a386aKL_LX409##[BR:ssr621_20200522]#XVM
+
+GPIO: probe end[ss_gpi_intc_domain_alloc] hw:42 -&gt; v:45
+[MS_PM_INTC] hw:20 -&gt; v:53
+hw-breakpoint: found 5 (+1 reserved) breakpoint and 4 watchpoint registers.
+hw-breakpoint: maximum watchpoint size is 8 bytes.
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+clocksource: Switched to clocksource arch_sys_counter
+NET: Registered protocol family 2
+TCP established hash table entries: 2048 (order: 1, 8192 bytes)
+TCP bind hash table entries: 2048 (order: 3, 40960 bytes)
+TCP: Hash tables configured (established 2048 bind 2048)
+UDP hash table entries: 128 (order: 0, 6144 bytes)
+UDP-Lite hash table entries: 128 (order: 0, 6144 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+hw perfevents: enabled with armv7_cortex_a7 PMU driver, 5 counters available
+workingset: timestamp_bits=30 max_order=16 bucket_order=0
+squashfs: version 4.0 (2009/01/31) Phillip Lougher
+jffs2: version 2.2. � 2001-2006 Red Hat, Inc.
+io scheduler noop registered
+io scheduler deadline registered (default)
+libphy: Fixed MDIO Bus: probed
+PPP generic driver version 2.4.2
+PPP BSD Compression module registered
+PPP Deflate Compression module registered
+PPP MPPE Compression module registered
+NET: Registered protocol family 24
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+Mstar_ehc_init version:20180309
+Sstar-ehci-2 H.W init
+CHIP_FUNCTION SET. ID=4, param=65537
+Titania3_series_start_ehc start
+[USB] config miu select [70] [e8] [ef] [ef]
+[USB] enable miu lower bound address subtraction
+[USB] init squelch level 0x2
+[USB] no platform_data, device tree coming
+[USB][EHC] dma coherent_mask 0xffffffffffffffff mask 0xffffffffffffffff
+BC disable 
+[USB] soc:Sstar-ehci-2 irq --&gt; 40
+Sstar-ehci-2 soc:Sstar-ehci-2: EHCI Host Controller
+Sstar-ehci-2 soc:Sstar-ehci-2: new USB bus registered, assigned bus number 1
+Sstar-ehci-2 soc:Sstar-ehci-2: irq 40, io mem 0xfd285000
+usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb1: Product: EHCI Host Controller
+usb usb1: Manufacturer: Linux 4.9.84 ehci_hcd
+usb usb1: SerialNumber: mstar
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+Sstar-ehci-1 H.W init
+CHIP_FUNCTION SET. ID=4, param=1
+Titania3_series_start_ehc start
+[USB] config miu select [70] [e8] [ef] [ef]
+[USB] enable miu lower bound address subtraction
+[USB] init squelch level 0x2
+[USB] no platform_data, device tree coming
+[USB][EHC] dma coherent_mask 0xffffffffffffffff mask 0xffffffffffffffff
+BC disable 
+[USB] soc:Sstar-ehci-1 irq --&gt; 39
+Sstar-ehci-1 soc:Sstar-ehci-1: EHCI Host Controller
+Sstar-ehci-1 soc:Sstar-ehci-1: new USB bus registered, assigned bus number 2
+Sstar-ehci-1 soc:Sstar-ehci-1: irq 39, io mem 0xfd284800
+usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb2: Product: EHCI Host Controller
+usb usb2: Manufacturer: Linux 4.9.84 ehci_hcd
+usb usb2: SerialNumber: mstar
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 1 port detected
+Sstar-ehci-3 H.W init
+CHIP_FUNCTION SET. ID=4, param=131073
+Titania3_series_start_ehc start
+[USB] config miu select [70] [e8] [ef] [ef]
+[USB] enable miu lower bound address subtraction
+[USB] init squelch level 0x2
+[USB] no platform_data, device tree coming
+[USB][EHC] dma coherent_mask 0xffffffffffffffff mask 0xffffffffffffffff
+BC disable 
+[USB] soc:Sstar-ehci-3 irq --&gt; 57
+Sstar-ehci-3 soc:Sstar-ehci-3: EHCI Host Controller
+Sstar-ehci-3 soc:Sstar-ehci-3: new USB bus registered, assigned bus number 3
+Sstar-ehci-3 soc:Sstar-ehci-3: irq 57, io mem 0xfd286400
+usb usb3: New USB device found, idVendor=1d6b, idProduct=0002
+usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+usb usb3: Product: EHCI Host Controller
+usb usb3: Manufacturer: Linux 4.9.84 ehci_hcd
+usb usb3: SerialNumber: mstar
+hub 3-0:1.0: USB hub found
+hub 3-0:1.0: 1 port detected
+usbcore: registered new interface driver cdc_wdm
+usbcore: registered new interface driver usb-storage
+mousedev: PS/2 mouse device common for all mice
+==20180309==&gt; hub_port_init 1 #0
+Plug in USB Port2
+i2c /dev entries driver
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+1f221000.uart0: ttyS0 at MMIO 0x0 (irq = 31, base_baud = 10800000) is a unknown
+1f221200.uart1: ttyS1 at MMIO 0x0 (irq = 32, base_baud = 10800000) is a unknown
+1f220400.uart2: ttyS2 at MMIO 0x0 (irq = 34, base_baud = 10800000) is a unknown
+1f221400.uart2: ttyS3 at MMIO 0x0 (irq = 35, base_baud = 10800000) is a unknown
+[Core Voltage] check_voltage_valid: Not support 0mV, use 850mV
+MSYS: DMEM request: [emac0_buff]:0x00000812
+MSYS: DMEM request: [emac0_buff]:0x00000812 success, CPU phy:@0x2CE4D000, virt:@0xCCE4D000
+libphy: mdio: probed
+mdio_bus mdio-bus@emac0: /soc/emac0/mdio-bus@emac0/ethernet-phy@0 has invalid PHY address
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 0
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 1
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 2
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 3
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 4
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 5
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 6
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 7
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 8
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 9
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 10
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 11
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 12
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 13
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 14
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 15
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 16
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 17
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 18
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 19
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 20
+usb 1-1: new high-speed USB device number 2 using Sstar-ehci-2
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 21
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 22
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 23
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 24
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 25
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 26
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 27
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 28
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 29
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 30
+mdio_bus mdio-bus@emac0: scan phy ethernet-phy at address 31
+[emac_phy_connect][3169] connected mac emac0 to PHY at mdio-bus@emac0:00 [uid=11112222, driver=SStar 10/100 Ethernet Phy]
+MSYS: DMEM request: [emac1_buff]:0x00062812
+MSYS: DMEM request: [emac1_buff]:0x00062812 success, CPU phy:@0x2CE50000, virt:@0xCCE50000
+libphy: mdio: probed
+mdio_bus mdio-bus@emac1: /soc/emac1/mdio-bus@emac1/ethernet-phy@1 has invalid PHY address
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 0
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 1
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 2
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 3
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 4
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 5
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 6
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 7
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 8
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 9
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 10
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 11
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 12
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 13
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 14
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 15
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 16
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 17
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 18
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 19
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 20
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 21
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 22
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 23
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 24
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 25
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 26
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 27
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 28
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 29
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 30
+mdio_bus mdio-bus@emac1: scan phy ethernet-phy at address 31
+[emac_phy_connect][3169] connected mac emac1 to PHY at mdio-bus@emac1:00 [uid=00000000, driver=Generic PHY]
+usb 1-1: New USB device found, idVendor=0bda, idProduct=f192
+usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Registered IR keymap rc-mstar-dtv
+input: mstar ir as /devices/virtual/rc/rc0/input0
+rc rc0: mstar ir as /devices/virtual/rc/rc0
+usb 1-1: Product: 802.11n  WLAN Adapter
+usb 1-1: Manufacturer: Realtek
+usb 1-1: SerialNumber: 00e04c000001
+ms_rtcpwc 1f006800.rtcpwc: rtc core: registered 1f006800.rtcpwc as rtc0
+MSYS: DMEM request: [BDMA_FSP_WBUFF]:0x00010040
+MSYS: DMEM request: [BDMA_FSP_WBUFF]:0x00010040 success, CPU phy:@0x2CEC0000, virt:@0xCCEC0000
+[Ser flash] phys=0x2cec0000, virt=0xccec0000, bus=0x0cec0000 len:0x10040
+[FSP] Flash is detected (0x1003, 0x20, 0x70, 0x18) ver1.1
+[FSP] 1-1-4 QUAD_READ MODE
+mtd .name = NOR_FLASH, .size = 0x01000000 (16MiB)
+ .erasesize = 0x00010000 .numeraseregions = 0
+MXP_PARTS!!
+MXP found at mxp_offset[3]=0x00020000, size=0x1000
+Creating 9 MTD partitions on &quot;NOR_FLASH&quot;:
+0x000000000000-0x000000060000 : &quot;BOOT&quot;
+0x000000060000-0x000000070000 : &quot;UBOOT_ENV&quot;
+0x000000070000-0x0000002f0000 : &quot;KERNEL&quot;
+0x0000002f0000-0x0000003f0000 : &quot;ROOTFS&quot;
+0x0000003f0000-0x000000ef0000 : &quot;APP&quot;
+0x000000ef0000-0x000000f30000 : &quot;LOGO&quot;
+0x000000f30000-0x000000fe0000 : &quot;CONFIG&quot;
+0x000000fe0000-0x000000ff0000 : &quot;ODM&quot;
+0x000000ff0000-0x000001000000 : &quot;ID&quot;
+[ms_cpufreq_init] Current clk=998244352
+[ahci_sstar_probe] , priv-&gt;res_ahci_port0 =0xfd345100 
+[ahci_sstar_probe] , priv-&gt;res_ahci_misc =0xfd2a4a00 
+[SATA] phy_mode =0
+SATA_TX_R50 trim=0x000F
+SATA_RX_R50 trim=0x000F
+SATA_TX_R50_IBIAS trim=0x0019
+SATA_RXPLL_ICTRL_CDR trim=0x0003
+[SATA0] Clock : ON
+sstar sata HW settings done!!!
+[SATA] phy_mode =0
+ahci_sstar 1f345000.sata: AHCI 0001.0300 32 slots 1 ports 6 Gbps 0x1 impl platform mode
+ahci_sstar 1f345000.sata: flags: ncq sntf pm led clo only pmp fbs pio slum part ccc apst 
+ahci_sstar 1f345000.sata: port 0 is not capable of FBS
+scsi host0: ahci_sstar
+ata1: SATA max UDMA/133 mmio [mem 0x1f345000-0x1f3450ff] port 0x100 irq 51
+[ahci_sstar_probe] , SSTAR AHCI SATA registered 
+Initializing XFRM netlink socket
+NET: Registered protocol family 17
+NET: Registered protocol family 15
+8021q: 802.1Q VLAN Support v1.8
+sctp: Hash tables configured (bind 128/204)
+ThumbEE CPU extension supported.
+Registering SWP/SWPB emulation handler
+ms_rtcpwc 1f006800.rtcpwc: setting system clock to 2023-09-20 03:10:38 UTC (1695179438)
+OF: fdt:not creating '/sys/firmware/fdt': CRC check failed
+ata1: SATA link down (SStatus 0 SControl 300)
+VFS: Mounted root (squashfs filesystem) readonly on device 31:3.
+devtmpfs: mounted
+This architecture does not have kernel memory protection.
+random: linuxrc: uninitialized urandom read (4 bytes read)
+random: sh: uninitialized urandom read (4 bytes read)
+random: mount: uninitialized urandom read (4 bytes read)
+random: S00devs: uninitialized urandom read (4 bytes read)
+random: mknod: uninitialized urandom read (4 bytes read)
+random: mknod: uninitialized urandom read (4 bytes read)
+random: mknod: uninitialized urandom read (4 bytes read)
+random: S01udev: uninitialized urandom read (4 bytes read)
+random: mkdir: uninitialized urandom read (4 bytes read)
+random: mount: uninitialized urandom read (4 bytes read)
+upgrade version: Aug  1 2020 17:10:48
+mount dir('/media/usb1') isn't exist now!
+check sda...
+sda... not found
+check sdb...
+sdb... not found
+check sdc...
+sdc... not found
+check sdd...
+sdd... not found
+check sde...
+sde... not found
+check sdf...
+sdf... not found
+check sdg...
+sdg... not found
+check sdh...
+sdh... not found
+check sdi...
+sdi... not found
+check sdj...
+sdj... not found
+check sdk...
+sdk... not found
+check sdl...
+sdl... not found
+enable log not found.
+enable log2 not found.
+163840
+163840
+1514
+mhal: loading out-of-tree module taints kernel.
+mhal: module license 'PROPRIETARY' taints kernel.
+Disabling lock debugging due to kernel taint
+mhal driver init
+jpe driver probed
+module [sys] init
+MI_SYSCFG_SetupMmapLoader default_config_path:/config/config_tool, argv1:/config/load_mmap,argv2:/config/mmap.ini
+Function = init_glob_miu_kranges, Line = 603, Insert KProtect for LX @ MIU: 0
+Function = init_glob_miu_kranges, Line = 612, [INIT] for LX0 kprotect: from 0x20000000 to 0x2FF00000, using block 0
+config...... strPath:/config/config_tool, argv0:/config/load_config
+function:parese_Cmdline,pCmd_Section:0xff00000
+MM
+U_
+MM
+A    miu=0,sz=3b00000  reserved_start=24500000
+r_front-&gt;miuBlockIndex:0,r_front-&gt;start_cpu_bus_pa:0x20000000,r_front-&gt;start_cpu_bus_pa+r_front-&gt;length:0x24500000
+r_back-&gt;miuBlockIndex:1,r_back-&gt;start_cpu_bus_pa:0x28000000,r_back-&gt;start_cpu_bus_pa+r_back-&gt;length:0x2ff00000
+mi_sys_mma_allocator_create success, heap_base_addr=24500000 length=3b00000 
+mm
+a_
+he
+ap
+_n
+am
+e0
+    miu=0,sz=2f00000  reserved_start=2d000000
+r_front-&gt;miuBlockIndex:1,r_front-&gt;start_cpu_bus_pa:0x28000000,r_front-&gt;start_cpu_bus_pa+r_front-&gt;length:0x2d000000
+mi_sys_mma_allocator_create success, heap_base_addr=2d000000 length=2f00000 
+Kernel CONFIG_HZ = 100
+Sigmastar Module version: project_commit.8456c3c sdk_commit.ec18ae1 build_time.20200707145953
+module [ai] init
+module [ao] init
+module [gfx] init
+module [divp] init
+module [disp] init
+module [hdmi] init
+module [vdec] init
+module [vdisp] init
+module [venc] init Jul  7 2020 15:00:16
+[GOP]HalGopUpdateGwinParam 718: GOP_id=011 not support
+[GOP]HalGopSetArgb1555Alpha 1203: GOPId=0x11 not support
+[GOP]HalGopSetArgb1555Alpha 1203: GOPId=0x11 not support
+insert juan mod
+bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+Ebtables v2.0 registered
+sh: bad number
+daemon server build:Apr 15 2020, 17:10:08  net port:8925
+Active thread listen in port:9025
+nCreate idx = 1 1
+nCreate idx = 0 0
+[ error] [0.022s] FLASH: [odm_read_all: 683] ODM OPEN /dev/mtdblock7 ...
+[  info] [0.059s] APP: [NK_PRODUCT_Init: 842] BuildData3
+[  info] [0.060s] APP: [NK_PRODUCT_Init: 844] BuildData Done3
+play_cam = 4
+MAX_CAM:10 max_bnc_cam:0 play_cam=4
+</code></pre>
+<h2 id="breaking-the-device">Breaking the device<a class="headerlink" href="#breaking-the-device" title="Permanent link">&para;</a></h2>
+<p>I unplugged this device at 99% complete during an OTA upgrade which caused UBoot unable to load Linux</p>
+<pre><code>Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+</code></pre>
+<h2 id="saving-the-device">Saving the device<a class="headerlink" href="#saving-the-device" title="Permanent link">&para;</a></h2>
+<p>The U-Boot console can be accessed ovar UART by holding down the Return/Enter key during boot.</p>
+<h3 id="printenv">printenv<a class="headerlink" href="#printenv" title="Permanent link">&para;</a></h3>
+<pre><code>SigmaStar # printenv
+
+UpgradeImage=SigmastarUpgrade.bin
+baudrate=115200
+bootargs=console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
+bootcmd=${s10};${s11};${s12};${s13};
+bootdelay=0
+bootm_failed=1
+cpu_part_start=1425e000
+ethact=sstar_emac
+ethaddr=00:32:65:00:00:04
+fileaddr=235cc190
+filesize=143
+ipaddr=192.168.1.114
+netmask=255.255.0.0
+s10=bootlogo
+s11=sf probe 0
+s12=sf read 0x22000000 0x70000 0x280000
+s13=bootm 0x22000000
+s21=bzr 200 1
+s22=bzr 55 2
+s23=usb start 2
+s24=fatload usb 0 0x22000000 help.rom
+s41=bzr 55 2
+s42=bzr 500 1
+s43=bzr 500 4
+s44=reset
+serverip=192.168.1.1
+sf_kernel_size=280000
+sf_kernel_start=70000
+sf_part_size=40000
+sf_part_start=ef0000
+stderr=serial
+stdin=serial
+stdout=serial
+usb_folder=images
+
+Environment size: 913/4092 bytes
+</code></pre>
+<h3 id="figuring-out-whats-fucked-up">Figuring out what's fucked up<a class="headerlink" href="#figuring-out-whats-fucked-up" title="Permanent link">&para;</a></h3>
+<p>Probe the SPI</p>
+<pre><code>sf probe 0
+</code></pre>
+<p>Dump the SPI to a .bin file on TFTP server</p>
+<pre><code>sfbin 0x22000000 0x00 &lt;ip&gt;:&lt;filename&gt;
+</code></pre>
+<p>Examine the dump. looking for Kernel</p>
+<pre><code>binwalk &lt;filename&gt;
+</code></pre>
+<pre><code>DECIMAL       HEXADECIMAL     DESCRIPTION                                                                                                                                                    
+
+---------------------------------------------------------------------------
+81051         0x13C9B         xz compressed data                                81428         0x13E14         CRC32 polynomial table, little endian             196608        0x30000         uImage header, header size: 64 bytes, header CRC: 0x529EA62C, created: 2020-08-12 02:22:22, image size: 190092 bytes, Data Address: 0x0, Entry Point: 0x0, data CRC: 0xB254D69A, OS: Firmware, CPU: ARM, image type: OS Kernel Image, compression type: lzma, image name: &quot;MVX4##I2M#g45a386aCM_UBT1501#XVM&quot;                                               196672        0x30040         xz compressed data                                3080192       0x2F0000        Squashfs filesystem, little endian, version 4.0, compression:xz, size: 844888 bytes, 309 inodes, blocksize: 131072 bytes, created: 2023-06-28 06:57:24
+4128768       0x3F0000        Squashfs filesystem, little endian, version 4.0, compression:xz, size: 10632832 bytes, 846 inodes, blocksize: 65536 bytes, created: 2023-06-28 06:57:28
+14825212      0xE236FC        xz compressed data
+</code></pre>
+<p>So, we found the kernel at offset <code>0x30000</code></p>
+<p>Now back to the device, we will reboot and test bootm with the newly discovered offset/address</p>
+<pre><code>sf probe 0
+</code></pre>
+<pre><code>sf read 0x22000000 0x30000 0x280000
+</code></pre>
+<pre><code>bootm 0x22000000 
+</code></pre>
+<p>It worked!</p>
+<p><img alt="it_worked.png" src="../it_worked.png" /></p>
+<p>But not really</p>
+<p>The real way to fix this is to load the latest firmware.rom onto a USB drive, name it <code>help.rom</code> and then run <code>${s23};${s24}</code> -- which runs the firmware upgrade from the USB port :)</p>
+<h2 id="brute-forcing">Brute Forcing<a class="headerlink" href="#brute-forcing" title="Permanent link">&para;</a></h2>
+<p>After dumping the firmware, I realized I had....well...the firmware. I used binwalk to extract the contents of the filesystem and found some password hashes. I started attacking the hashes with hashcat mask attacks.</p>
+<pre><code>?l?u?d for 1-4 chars
+?l for 5+ chars
+</code></pre>
+<p><img alt="hashcat.png" src="../hashcat.png" /></p>
+<p>Creds</p>
+<pre><code>stb:stb
+root:zlxx.
+</code></pre>
+<p>Next step: dump the squashfs filesystem(s) and see what's hanging around in there.</p>
+<p>Now, get root -- in the UBoot shell enter</p>
+<pre><code>set bootargs console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc &amp;&amp; /bin/busybox LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
+</code></pre>
+<p>Then </p>
+<pre><code>${s10};${s11};${s12};${s13}
+</code></pre>
+<p>That didn't work...</p>
+<h2 id="boot-sequence">Boot sequence<a class="headerlink" href="#boot-sequence" title="Permanent link">&para;</a></h2>
+<p>Lets start examining this thing and figure out where a good spot is that we can inject some commands to get a shell.</p>
+<h3 id="ipl">IPL<a class="headerlink" href="#ipl" title="Permanent link">&para;</a></h3>
+<p>I don't really know what this does, just included it for completeness :)</p>
+<h3 id="spl-uboot-by-sigmastarmstar">SPL (UBoot by SigmaStar/MStar)<a class="headerlink" href="#spl-uboot-by-sigmastarmstar" title="Permanent link">&para;</a></h3>
+<p>The SPL is the UBoot environment I had access to after bricking the device. We can check the boot args using <code>printenv</code> or <code>env print</code>. The bootargs are passed to the linux kernel, and <code>init</code> is the first thing ran after the kernel loads successfully. In this case we see that the first thing run by Linux is <code>/linuxrc</code>.</p>
+<pre><code class="language-sh">bootargs=console=ttyS0,115200 root=/dev/mtdblock3 rootfstype=squashfs ro init=/linuxrc LX_MEM=0xff00000 mma_heap=MMU_MMA,miu=0,sz=0x3B00000 mma_heap=mma_heap_name0,miu=0,sz=0x2F00000 mma_memblock_remove=1
+</code></pre>
+<h3 id="linux-kernel">Linux Kernel<a class="headerlink" href="#linux-kernel" title="Permanent link">&para;</a></h3>
+<p>The following params are passed to the linux kernel by UBoot:</p>
+<pre><code class="language-sh">mount /dev/mtdblock3
+/liniuxrc
+</code></pre>
+<h3 id="linuxrc">Linuxrc<a class="headerlink" href="#linuxrc" title="Permanent link">&para;</a></h3>
+<p>Lets see the contents of <code>/linuxrc</code></p>
+<pre><code class="language-sh">/bin/bash
+</code></pre>
+<p>Well that wasn't much help. After linux loads, it spawns bash. Next we should check out the init.d scripts, starting with <code>rcS</code></p>
+<h3 id="initdrcs">init.d/rcS<a class="headerlink" href="#initdrcs" title="Permanent link">&para;</a></h3>
+<pre><code class="language-sh">#! /bin/sh
+/bin/mount -a
+
+for initscript in /etc/init.d/S[0-9][0-9]*
+do
+        if [ -x $initscript ] ;
+        then
+                $initscript
+        fi
+done
+</code></pre>
+<p>Ok, now we're getting somewhere. There must be some scripts in <code>/etc/init.d/</code> that match the pattern laid out in rcS.
+Lets take a look at these initscripts.</p>
+<h3 id="initscritpts-in-etcinitd">initscritpt(s) in /etc/init.d<a class="headerlink" href="#initscritpts-in-etcinitd" title="Permanent link">&para;</a></h3>
+<h4 id="s00devs">S00devs<a class="headerlink" href="#s00devs" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#!/bin/sh
+
+if [ ! -e /dev/console ] ; then  
+    mknod /dev/console c 5 1
+fi
+
+if [ ! -e /dev/ttyAMA0 ] ; then  
+    mknod /dev/ttyAMA0 c 204 64
+fi
+
+if [ ! -e /dev/ttyAMA1 ] ; then  
+    mknod /dev/ttyAMA1 c 204 65
+fi
+
+if [ ! -e /dev/ttyS000 ] ; then  
+    mknod /dev/ttyS000 c 204 64
+fi
+
+if [ ! -e /dev/null ] ; then  
+    mknod /dev/null c 1 3
+fi
+
+if [ ! -e /dev/zero ] ; then  
+    mknod /dev/zero c 1 5
+fi
+</code></pre>
+<p>This one is just initializing consoles I think.</p>
+<h4 id="s01udevs">S01udevs<a class="headerlink" href="#s01udevs" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#!/bin/sh
+
+mkdir /dev/pts
+mount -t devpts devpts /dev/pts
+/bin/echo &quot;/sbin/mdev&quot; &gt; /proc/sys/kernel/hotplug
+/sbin/mdev -s
+
+#udevd --daemon
+
+#udevtrigger
+</code></pre>
+<p>This one does some stuff, not quite sure what :D</p>
+<h4 id="s02pppd">S02pppd<a class="headerlink" href="#s02pppd" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#!/bin/sh
+mkdir /tmp/run
+mkdir /tmp/lock
+mount --binding /tmp/run  /var/run
+mount --binding /tmp/lock /var/lock
+</code></pre>
+<p>This one mounts some stuff using --binding. This was my first encounter with the --binding flag. This is cool, because we're actually going to use this technique to root the device.</p>
+<h4 id="s03pppoe">S03pppoe<a class="headerlink" href="#s03pppoe" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#!/bin/sh
+#echo &quot;PPPoE config&quot;
+#cp /etc/ppp/chap-secrets-bk /tmp/chap-secrets
+#cp /etc/ppp/pap-secrets-bk /tmp/pap-secrets
+#cp /etc/ppp/pppoe.conf-bk /tmp/pppoe.conf
+#cp /etc/ppp/chap-secrets-bk /tmp/chap-secrets-bak
+#cp /etc/ppp/pap-secrets-bk /tmp/pap-secrets-bak
+#cp /etc/ppp/pppoe.conf-bk /tmp/pppoe.conf-bak
+</code></pre>
+<p>Everything in here is commented out.</p>
+<h4 id="s80network">S80network<a class="headerlink" href="#s80network" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#!/bin/sh
+ipaddr=
+bootp=
+gateway=
+netmask=
+hostname=
+netdev=
+autoconf=
+
+ifconfig lo 127.0.0.1 up
+ifconfig eth0 up
+route add -net 127.0.0.0 netmask 255.0.0.0 lo
+for ipinfo in `cat /proc/cmdline`
+do
+        case &quot;$ipinfo&quot; in
+        ip=*)
+                for var in  ipaddr bootp gateway netmask hostname netdev autoconf
+                do
+                        eval read $var
+                done &lt;&lt; EOF
+                `echo &quot;$ipinfo&quot; | sed &quot;s/:/\n/g&quot; | sed &quot;s/^[    ]*$/-/g&quot;`
+EOF
+                ipaddr=`echo &quot;$ipaddr&quot; | cut -d = -f 2`
+                [ x$ipaddr == x ] &amp;&amp; ipaddr=x
+                ;;
+        esac
+done
+[ -z &quot;$ipaddr&quot; ] &amp;&amp; exit 0
+
+echo &quot;      IP: $ipaddr&quot;
+echo &quot;   BOOTP: $bootp&quot;
+echo &quot; GATEWAY: $gateway&quot;
+echo &quot; NETMASK: $netmask&quot;
+echo &quot;HOSTNAME: $hostname&quot;
+echo &quot;  NETDEV: $netdev&quot;
+echo &quot;AUTOCONF: $autoconf&quot;
+
+if [ x$ipaddr == x- ] ; then
+        # use DHCP
+        :
+else
+        cmd=&quot;ifconfig $netdev $ipaddr&quot;
+        [ x$netmask != x- ] &amp;&amp; cmd=&quot;$cmd netmask $netmask&quot;
+        eval $cmd
+        [ x$gateway != x- ] &amp;&amp; route add default gw $gateway
+fi
+</code></pre>
+<p>This one initializes the network configuration.</p>
+<h4 id="s99">S99<a class="headerlink" href="#s99" title="Permanent link">&para;</a></h4>
+<pre><code class="language-sh">#! /bin/sh
+
+HOME=/
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/opt/bin:/opt/sbin:/opt/module/hi_tools
+runlevel=S
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+export LD_LIBRARY_PATH=&quot;/usr/local/lib:/usr/lib:/lib:/opt/lib&quot;
+
+# Stop tty  from doing XOFF/XON with Ctrl-S/Ctrl-Q, Modify Ctrl-D/C/\/U/Z/R/W/V/O to undef
+
+stty ixany;
+stty ixoff -ixon;
+stty eof undef;
+stty intr undef;
+stty quit undef;
+stty kill undef;
+stty susp undef;
+stty rprnt undef;
+stty werase undef;
+stty lnext undef;
+stty flush undef
+
+/bin/mount -a
+#/bin/echo /sbin/mdev &gt; /proc/sys/kernel/hotplug
+#/sbin/mdev -s
+/bin/upgrade &amp; 
+mount -t squashfs /dev/mtdblock4 /opt
+#export PATH
+#export LD_LIBRARY_PATH
+cd /opt
+sh run_app.sh
+</code></pre>
+<p>This one is also interesting, lots of custom code in here.
+While attached to the UART console I noticed 
+Interesting spots to look for vulns:
+- maybe we can skip right to <code>run_app.sh</code> before the tty is killed
+- maybe we can alias <code>stty</code> to prevent tty from being killed
+- maybe <code>/bin/upgrade</code> checks local storage?</p>
+<h2 id="actually-how-to-get-root">Actually how to get Root<a class="headerlink" href="#actually-how-to-get-root" title="Permanent link">&para;</a></h2>
+<p>After bricking the device I was searching for ways to rebuild it. While looking for clues I searched the IPL code that is displayed on boot, and that's when I came across <a href="https://www.dpin.de/nf/cheap-surveillance-cameras-nvr-hacking-to-work/">Nicole's blog</a>. </p>
+<p>In the blog post, Nicole shared <a href="https://gist.github.com/aSmig/e50058a54ab85428915521f233ffa3d0">this guide</a></p>
+<p>As she mentioned, it didn't work at first. I used the UBoot command line to only dump the app partition and beyond. Then <code>binwalk</code> was able to properly dump the squashfs -- previously it was unable to do so bc of some corruption.</p>
+<p>In the gist/rooting guide Nicole shared, it's mentioned that:</p>
+<blockquote>
+<p>One of the startup scripts contains the following snippet: </p>
+</blockquote>
+<pre><code class="language-sh">if [ -e $MOUNT_DIR/enable_log_forever ];then
+                echo &quot;enable log2 found.&quot;
+                rv=$(cat $MOUNT_DIR/enable_log_forever)
+                if [ &quot;$rv&quot; == &quot;1000000001&quot; ];then
+                        if [ -e $MOUNT_DIR/dvr_app ];then
+                                echo &quot;mount bind dvr_app.&quot;
+                                mount --bind $MOUNT_DIR/dvr_app /root/dvr_app/dvr_app
+                        fi
+</code></pre>
+<p>On my device, this snippet resides in <code>/opt/run_app.sh</code>, which was the last thing called from init.d/S99</p>
+<pre><code class="language-sh">if [ -e $MOUNT_DIR/enable_log_forever ];then
+                echo &quot;enable log2 found.&quot;
+                rv=$(cat $MOUNT_DIR/enable_log_forever)
+                if [ &quot;$rv&quot; == &quot;1000000001&quot; ];then
+                        if [ -e $MOUNT_DIR/app.out ];then
+                                echo &quot;mount bind app.out.&quot;
+                                mount --bind $MOUNT_DIR/app.out /opt/app/app.out
+                        fi
+</code></pre>
+<p>Upon examining the snippet, I noticed something interesting -- all instances of <code>dvr_app</code> had been replaced with <code>app.out</code>!
+So, to get the exploit from the gist working, all you need to do is update the dvr's main binary name and path.</p>
+<p>This is where the fun ends. I set out to get a root shell on this thing just to see if I could. Now that I have it, I'll use it in the future for debugging and hunting bugs. Since the device doesn't create or listen to any public facing sockets, any findings likely won't be that critical, however this device DOES attach to AWS to sync data to the mobile app.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

